@@ -129,6 +129,18 @@ class ProjectUpdate:
     moderation_message: Optional[str] = None
     moderation_message_body: Optional[str] = None
 
+@dataclass
+class VersionUpdate:
+    name: Optional[str] = None
+    version_number: Optional[str] = None
+    changelog: Optional[str] = None
+    dependencies: Optional[List[DictKV]] = None
+    game_versions: Optional[List[str]] = None
+    version_type: Optional[VersionType] = None
+    loaders: Optional[List[str]] = None
+    featured: Optional[bool] = None
+    status: Optional[VersionStatus] = None
+    requested_status: Optional[RequestedVersionStatus] = None
 
 @dataclass
 class GalleryImage:

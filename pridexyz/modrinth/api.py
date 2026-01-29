@@ -195,6 +195,10 @@ class ModrinthAPI:
 
             return self._request("POST", "/version", data={"data": json.dumps(payload)}, files=files)
 
+    def modify_version(self, version_id: str, update: VersionUpdate) -> None:
+        payload = self._to_dict(update)
+        self._request("PATCH", f"/version/{version_id}", json=payload)
+
     def add_gallery_image(self, id_or_slug: str, image: GalleryImage) -> None:
         params: DictKV = {"ext": image.ext, "featured": str(image.featured).lower()}
         if image.title:

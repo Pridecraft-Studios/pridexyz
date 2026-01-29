@@ -6,3 +6,4 @@ requests~=2.32.5
 colorlog~=6.10.1
 colour-science~=0.4.6
 networkx==3.5
+typer

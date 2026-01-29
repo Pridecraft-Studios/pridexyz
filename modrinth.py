@@ -1,3 +1,4 @@
+import dotenv
 import json
 import sys
 import traceback
@@ -5,13 +6,11 @@ from datetime import datetime
 from pathlib import Path
 from typing import List
 
-import dotenv
-
 from pridexyz.logger import get_logger
 from pridexyz.markdown import markdown_with_frontmatter_to_dict, appy_modrinth_markdown_template
 from pridexyz.modrinth.api import ModrinthAPI, ModrinthAPIError, cut_game_versions_until
 from pridexyz.modrinth.types import (NewProject, ProjectType, SideSupport, ProjectUpdate, GalleryImage, NewVersion,
-                                     VersionType, DictKV)
+                                     VersionType, DictKV, VersionUpdate)
 
 logger = get_logger(__name__)
 BUILD_DIR = Path("build")
@@ -172,7 +171,7 @@ def create(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
                                additional_categories=[], project_type=ProjectType.RESOURCEPACK, body="......",
                                client_side=SideSupport.REQUIRED, server_side=SideSupport.UNSUPPORTED,
                                organization_id=org_id_lookup[project_data["org_id_source"]],
-                               license_id=project_data["license_id"], ),
+                               license_id=project_data["license_id"]),
                     icon_path=project_dir / project_data["icon_file"])
                 return {"slug": slug, "dir_name": dir_name, "success": True, "result": result}
             except ModrinthAPIError as e:
@@ -229,7 +228,7 @@ def update_gallery(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
                                                                                    featured=True,
                                                                                    title=project_data["gallery_title"],
                                                                                    description=project_data[
-                                                                                       "gallery_description"], ))
+                                                                                       "gallery_description"]))
 
                 logger.info(f"[{dir_name}] Gallery updated successfully.")
                 return {"slug": slug, "dir_name": dir_name, "success": True}
@@ -283,7 +282,7 @@ def update_data(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
                                                                                    discord_url=project_data[
                                                                                        "discord_url"], body=new_body,
                                                                                    license_id=project_data[
-                                                                                       "license_id"], ))
+                                                                                       "license_id"]))
                 logger.info(f"[{dir_name}] Metadata updated successfully.")
                 return {"slug": slug, "dir_name": dir_name, "success": True}
             except ModrinthAPIError as e:
@@ -301,6 +300,46 @@ def update_data(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
             logger.error("Some metadata updates failed.", exc_info=True)
 
     log_task_completion("update_data", start_time)
+
+
+def update_mc_versions(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
+    start_time = run_task("update_mc_versions")
+    game_versions = modrinth_api.get_game_versions()
+    org_projects = fetch_org_projects_from_lookup(modrinth_api, org_id_lookup)
+
+    def make_update_mc_versions_fn(project_dir, project_data, project):
+        slug = project_data["slug"]
+        dir_name = project_dir.name
+        version_id = project.get("versions").get("id")
+
+        def _wrapped():
+            try:
+                modrinth_api.modify_version(version_id, VersionUpdate(
+                    game_versions=get_game_versions_until_cutoff(project_data["version_game_version_cutoff"],
+                        game_versions)))
+                return {"slug": slug, "dir_name": dir_name, "success": True}
+            except ModrinthAPIError as e:
+                return {"slug": slug, "dir_name": dir_name, "success": False, "ModrinthAPIError": e}
+
+        return _wrapped
+
+    to_publish = do_for_each_project(org_projects, make_update_mc_versions_fn, skip_if_missing=True,
+                                     log_queue_msg="[{dir}] Queued for update_mc_versions...", all_org_mode=True)
+
+    if to_publish:
+        try:
+            results = modrinth_api.parallel_requests(to_publish)
+            for result in results:
+                dir_name = result.get("dir_name", "???")
+                if result.get("success"):
+                    logger.info(f"[{dir_name}] update_mc_versions successfully.")
+                else:
+                    logger.error(f"[{dir_name}] Failed to update_mc_versions: {result.get('ModrinthAPIError')}",
+                                 exc_info=True)
+        except ModrinthAPIError as e:
+            logger.error("Failed to update_mc_versions some projects.", exc_info=True)
+
+    log_task_completion("update_mc_versions", start_time)
 
 
 def update_body(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
@@ -324,7 +363,7 @@ def update_body(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
                 new_body = appy_modrinth_markdown_template(project_data["body"],
                                                            context={"upload_gallery_url": gallery_url})
 
-                modrinth_api.modify_project(refreshed_project["id"], ProjectUpdate(body=new_body, ))
+                modrinth_api.modify_project(refreshed_project["id"], ProjectUpdate(body=new_body))
                 logger.info(f"[{dir_name}] Body updated successfully.")
                 return {"slug": slug, "dir_name": dir_name, "success": True}
             except ModrinthAPIError as e:
@@ -393,6 +432,7 @@ def update(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
             update_icon(modrinth_api, org_id_lookup)
             update_gallery(modrinth_api, org_id_lookup)
             update_data(modrinth_api, org_id_lookup)
+            update_body(modrinth_api, org_id_lookup)
         case "icon":
             update_icon(modrinth_api, org_id_lookup)
         case "gallery":
@@ -445,7 +485,7 @@ def publish(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
                                project_id=project["id"], loaders=["minecraft"], version_type=VersionType.RELEASE,
                                dependencies=[],
                                game_versions=get_game_versions_until_cutoff(project_data["version_game_version_cutoff"],
-                                                                            game_versions), ),
+                                                                            game_versions)),
                     [project_dir / project_data["version_file"]], project_data["version_file"])
                 return {"slug": slug, "dir_name": dir_name, "success": True, "result": result}
             except ModrinthAPIError as e:
@@ -660,6 +700,8 @@ def main() -> None:
             workspace_1(modrinth_api, org_id_lookup)
         case "workspace_2":
             workspace_2(modrinth_api, org_id_lookup)
+        case "update_mc_versions":
+            update_mc_versions(modrinth_api, org_id_lookup)
         case _:
             logger.error("Unknown subtask")
 

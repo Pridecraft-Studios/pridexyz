@@ -448,7 +448,7 @@ def update_mc_versions(ctx: typer.Context):
         def _update_vers_task(d=local_data, p=project, dirname=local_dir_name):
             try:
                 if isinstance(p.get("versions"), list) and len(p.get("versions")) > 0:
-                    vid = p.get("versions")[0]
+                    vid = p.get("versions")[len(p.get("versions")) - 1]
                 else:
                     return {
                         "slug": d["slug"],

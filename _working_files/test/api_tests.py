@@ -2,8 +2,8 @@ from typing import List
 
 import dotenv
 
-from util.modrinth.api import ModrinthAPI
-from util.modrinth.types import DictKV
+from pridexyz.modrinth.api import ModrinthAPI
+from pridexyz.modrinth.types import DictKV
 
 
 def simplify_versions(versions: List[DictKV]) -> List[str]:
@@ -21,10 +21,13 @@ def simplify_versions(versions: List[DictKV]) -> List[str]:
 modrinth = ModrinthAPI(
     token=dotenv.get_key("../../.env", "MODRINTH_TOKEN"),
     api_url="https://api.modrinth.com",
-    user_agent="Pridecraft-Studios/pridetooltips testing"
+    user_agent="Pridecraft-Studios/pridetooltips testing",
 )
 
 
 loaders = modrinth.get_loaders()
 for loader in loaders:
     print(f"Loader: {loader['name']}: {loader['supported_project_types']}")
+
+
+print(modrinth.get_organization_projects("jIL2YTOk"))

@@ -1,0 +1,59 @@
+{
+	"3clr": {
+		"description_name": "Tricolor",
+		"explanation": "A simple tricolor flag with three colors",
+		"version": 1,
+		"expects": 3
+	},
+	"3clr-vert": {
+		"description_name": "Tricolor (Vertical)",
+		"explanation": "A simple tricolor vertical flag with three colors",
+		"version": 1,
+		"expects": 3,
+		"vertical": true
+	},
+	"4clr": {
+		"description_name": "4-Color",
+		"explanation": "A simple 4-color flag with four colors",
+		"version": 1,
+		"expects": 4
+	},
+	"4clr-vert": {
+		"description_name": "4-Color (Vertical)",
+		"explanation": "A simple 4-color vertical flag with four colors",
+		"version": 1,
+		"expects": 4,
+		"vertical": true
+	},
+	"5clr": {
+		"description_name": "5-Color",
+		"explanation": "A simple 5-color flag with five colors",
+		"version": 1,
+		"expects": 5
+	},
+	"5clr-vert": {
+		"description_name": "5-Color (Vertical)",
+		"explanation": "A simple 5-color vertical flag with five colors",
+		"version": 1,
+		"expects": 5,
+		"vertical": true
+	},
+	"7clr": {
+		"description_name": "7-Color",
+		"explanation": "A simple 7-color flag with seven colors",
+		"version": 1,
+		"expects": 7
+	},
+	"7clr-vert": {
+		"description_name": "7-Color (Vertical)",
+		"explanation": "A simple 7-color vertical flag with seven colors",
+		"version": 1,
+		"expects": 7,
+		"vertical": true
+	},
+	"mono": {
+		"description_name": "Monochrome",
+		"explanation": "A simple monochrome style with one color",
+		"version": 1
+	}
+}

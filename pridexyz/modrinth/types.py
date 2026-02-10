@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Optional, List, Dict, Any
 
 DictKV = Dict[str, Any]
+ListDictKV = List[DictKV]
 
 
 class SideSupport(str, Enum):
@@ -38,6 +39,7 @@ class ProjectType(str, Enum):
     MOD = "mod"
     MODPACK = "modpack"
     RESOURCEPACK = "resourcepack"
+
 
 class VersionType(str, Enum):
     RELEASE = "release"
@@ -107,6 +109,7 @@ class NewProject:
     license_url: Optional[str] = None
     is_draft: bool = True
 
+
 @dataclass
 class ProjectUpdate:
     slug: Optional[str] = None
@@ -128,6 +131,20 @@ class ProjectUpdate:
     license_url: Optional[str] = None
     moderation_message: Optional[str] = None
     moderation_message_body: Optional[str] = None
+
+
+@dataclass
+class VersionUpdate:
+    name: Optional[str] = None
+    version_number: Optional[str] = None
+    changelog: Optional[str] = None
+    dependencies: Optional[List[DictKV]] = None
+    game_versions: Optional[List[str]] = None
+    version_type: Optional[VersionType] = None
+    loaders: Optional[List[str]] = None
+    featured: Optional[bool] = None
+    status: Optional[VersionStatus] = None
+    requested_status: Optional[RequestedVersionStatus] = None
 
 
 @dataclass

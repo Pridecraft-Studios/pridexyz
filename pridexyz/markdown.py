@@ -20,7 +20,9 @@ def appy_modrinth_markdown_template(template: str, context: dict) -> str:
     rendered = template.format_map(SafeDict({k: v for k, v in context.items()}))
 
     # Remove lines containing '!remove_line!'
-    cleaned = "\n".join(line for line in rendered.splitlines() if "!remove_line!" not in line)
+    cleaned = "\n".join(
+        line for line in rendered.splitlines() if "!remove_line!" not in line
+    )
 
     return cleaned
 

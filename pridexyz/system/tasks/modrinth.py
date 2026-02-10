@@ -1,16 +1,30 @@
+import re
 from enum import Enum
 from pathlib import Path
 from typing import List
 
 import typer
 
-from pridexyz.markdown import markdown_with_frontmatter_to_dict, appy_modrinth_markdown_template
+from pridexyz.markdown import (
+    markdown_with_frontmatter_to_dict,
+    appy_modrinth_markdown_template,
+)
 from pridexyz.modrinth.api import ModrinthAPI, ModrinthAPIError, cut_game_versions_until
-from pridexyz.modrinth.types import (NewProject, ProjectType, SideSupport, ProjectUpdate,
-                                     GalleryImage, NewVersion, VersionType, DictKV, VersionUpdate)
-from pridexyz.system.config import settings, logger
+from pridexyz.modrinth.types import (
+    NewProject,
+    ProjectType,
+    SideSupport,
+    ProjectUpdate,
+    GalleryImage,
+    NewVersion,
+    VersionType,
+    DictKV,
+    VersionUpdate,
+)
+from pridexyz.system.config import logger, Config, get_config
 
 app = typer.Typer(help="Manage Modrinth projects (Create, Update, Publish, Sync)")
+
 
 class UpdateMode(str, Enum):
     ALL = "all"
@@ -25,16 +39,16 @@ class CleanupMode(str, Enum):
     PUBLISHED = "published"
 
 
-def get_api() -> ModrinthAPI:
-    if not settings.MODRINTH_TOKEN or not settings.MODRINTH_API_URL:
+def get_api(settings: Config) -> ModrinthAPI:
+    if not settings.modrinth_token or not settings.modrinth_api_url:
         logger.error("Missing Modrinth configuration in .env")
         raise typer.Exit(1)
 
     return ModrinthAPI(
-        token=settings.MODRINTH_TOKEN,
-        api_url=settings.MODRINTH_API_URL,
-        user_agent=f"Pridecraft-Studios/pridexyz ({settings.BUILD_USER})",
-        enable_debug_logging=settings.DEBUG_LOGGING
+        token=settings.modrinth_token,
+        api_url=settings.modrinth_api_url,
+        user_agent=f"Pridecraft-Studios/pridexyz ({settings.build_user})",
+        enable_debug_logging=settings.debug_logging,
     )
 
 
@@ -46,14 +60,14 @@ def load_project_data(project_dir: Path) -> dict:
     return markdown_with_frontmatter_to_dict(md_file)
 
 
-def fetch_org_projects(api: ModrinthAPI) -> tuple[dict, dict]:
+def fetch_org_projects(api: ModrinthAPI, settings: Config) -> tuple[dict, dict]:
     lookup = settings.get_org_lookup()
     projects = {}
 
     for _, org_id in lookup.items():
         try:
-            projs = api.get_organization_projects(org_id)
-            for p in projs:
+            get_projects = api.get_organization_projects(org_id)
+            for p in get_projects:
                 projects[p["slug"]] = p
         except ModrinthAPIError as e:
             logger.error(f"Failed to fetch organization projects: {e}")
@@ -61,39 +75,50 @@ def fetch_org_projects(api: ModrinthAPI) -> tuple[dict, dict]:
     return projects, lookup
 
 
-def get_game_versions_until_cutoff(cutoff_version: str, versions: List[DictKV]) -> List[str]:
+def get_game_versions_until_cutoff(
+    cutoff_version: str, versions: List[DictKV]
+) -> List[str]:
     cut_versions = cut_game_versions_until(cutoff_version, versions)
     return [version["version"] for version in cut_versions]
 
 
 def check_files(project_dir: Path, data: dict) -> bool:
-    required = [data.get("version_file"), data.get("icon_file"), data.get("gallery_file")]
+    required = [
+        data.get("version_file"),
+        data.get("icon_file"),
+        data.get("gallery_file"),
+    ]
     missing = [f for f in required if f and not (project_dir / f).is_file()]
 
     if missing:
-        logger.warning(f"[{project_dir.name}] Missing required file(s): {', '.join(str(m) for m in missing)}")
+        logger.warning(
+            f"[{project_dir.name}] Missing required file(s): {', '.join(str(m) for m in missing)}"
+        )
         return False
     return True
 
 
 @app.command()
-def check():
-    if not settings.BUILD_DIR.is_dir():
+def check(ctx: typer.Context):
+    settings = get_config(ctx)
+    if not settings.build_dir.is_dir():
         logger.error("Build directory missing. Run 'build' first.")
         raise typer.Exit(1)
 
-    api = get_api()
-    existing_projects, _ = fetch_org_projects(api)
+    api = get_api(settings)
+    existing_projects, _ = fetch_org_projects(api, settings)
 
     total, files_ok, modrinth_ok = 0, 0, 0
 
     logger.info("Starting check task...")
 
-    for project_dir in settings.BUILD_DIR.iterdir():
-        if not project_dir.is_dir(): continue
+    for project_dir in settings.build_dir.iterdir():
+        if not project_dir.is_dir():
+            continue
 
         data = load_project_data(project_dir)
-        if not data: continue
+        if not data:
+            continue
 
         total += 1
         slug = data.get("slug", "???")
@@ -109,20 +134,25 @@ def check():
         else:
             logger.warning(f"[{project_dir.name}] Not found on Modrinth.")
 
-    logger.info(f"Checked {total} projects: {files_ok} valid locally, {modrinth_ok} exist remotely.")
+    logger.info(
+        f"Checked {total} projects: {files_ok} valid locally, {modrinth_ok} exist remotely."
+    )
 
 
 @app.command()
-def create():
-    api = get_api()
-    existing_projects, org_lookup = fetch_org_projects(api)
+def create(ctx: typer.Context):
+    settings = get_config(ctx)
+    api = get_api(settings)
+    existing_projects, org_lookup = fetch_org_projects(api, settings)
     queue = []
 
-    for project_dir in settings.BUILD_DIR.iterdir():
-        if not project_dir.is_dir(): continue
+    for project_dir in settings.build_dir.iterdir():
+        if not project_dir.is_dir():
+            continue
 
         data = load_project_data(project_dir)
-        if not data: continue
+        if not data:
+            continue
 
         slug = data.get("slug")
         if slug in existing_projects:
@@ -133,7 +163,9 @@ def create():
             continue
 
         # Closure for parallel execution
-        def _create_task(d=data, p_dir=project_dir):
+        def _create_task(d=None, p_dir=project_dir):
+            if d is None:
+                d = data
             dir_name = p_dir.name
             try:
                 org_id = org_lookup.get(d["org_id_source"])
@@ -149,13 +181,23 @@ def create():
                         license_id=d["license_id"],
                         client_side=SideSupport.REQUIRED,
                         server_side=SideSupport.UNSUPPORTED,
-                        body="......"
+                        body="......",
                     ),
-                    icon_path=p_dir / d["icon_file"]
+                    icon_path=p_dir / d["icon_file"],
                 )
-                return {"slug": d["slug"], "dir_name": dir_name, "success": True, "result": result}
+                return {
+                    "slug": d["slug"],
+                    "dir_name": dir_name,
+                    "success": True,
+                    "result": result,
+                }
             except ModrinthAPIError as e:
-                return {"slug": d["slug"], "dir_name": dir_name, "success": False, "ModrinthAPIError": e}
+                return {
+                    "slug": d["slug"],
+                    "dir_name": dir_name,
+                    "success": False,
+                    "ModrinthAPIError": e,
+                }
 
         logger.info(f"[{project_dir.name}] Queued for creation...")
         queue.append(_create_task)
@@ -166,29 +208,43 @@ def create():
             if res["success"]:
                 logger.info(f"[{res.get('dir_name')}] Created successfully.")
             else:
-                logger.error(f"[{res.get('dir_name')}] Failed: {res.get('ModrinthAPIError')}")
+                logger.error(
+                    f"[{res.get('dir_name')}] Failed: {res.get('ModrinthAPIError')}"
+                )
 
 
 @app.command()
-def update(mode: UpdateMode = typer.Argument(..., help="What to update: icon, gallery, data, body, or all")):
-    api = get_api()
-    existing_projects, _ = fetch_org_projects(api)
+def update(
+    ctx: typer.Context,
+    mode: UpdateMode = typer.Argument(
+        ..., help="What to update: icon, gallery, data, body, or all"
+    ),
+):
+    settings = get_config(ctx)
+    api = get_api(settings)
+    existing_projects, _ = fetch_org_projects(api, settings)
     queue = []
 
-    for project_dir in settings.BUILD_DIR.iterdir():
-        if not project_dir.is_dir(): continue
+    for project_dir in settings.build_dir.iterdir():
+        if not project_dir.is_dir():
+            continue
 
         data = load_project_data(project_dir)
-        if not data: continue
+        if not data:
+            continue
 
         slug = data.get("slug")
         project = existing_projects.get(slug)
 
         if not project:
-            logger.warning(f"[{project_dir.name}] Project not found on Modrinth, skipping.")
+            logger.warning(
+                f"[{project_dir.name}] Project not found on Modrinth, skipping."
+            )
             continue
 
-        def _update_task(d=data, p_dir=project_dir, p=project, m=mode):
+        def _update_task(d=None, p_dir=project_dir, p=project, m=mode):
+            if d is None:
+                d = data
             dir_name = p_dir.name
             s = d["slug"]
 
@@ -196,28 +252,41 @@ def update(mode: UpdateMode = typer.Argument(..., help="What to update: icon, ga
                 if m in [UpdateMode.ALL, UpdateMode.ICON]:
                     logger.info(f"[{dir_name}] Updating icon...")
                     icon_file = p_dir / d["icon_file"]
-                    api.change_project_icon(p["id"], icon_path=icon_file, ext=icon_file.suffix.lstrip("."))
+                    api.change_project_icon(
+                        p["id"], icon_path=icon_file, ext=icon_file.suffix.lstrip(".")
+                    )
 
                 if m in [UpdateMode.ALL, UpdateMode.GALLERY]:
                     logger.info(f"[{dir_name}] Updating gallery...")
                     gallery_file = p_dir / d["gallery_file"]
                     if p.get("gallery"):
                         try:
-                            api.delete_gallery_image(d["gallery_file"], p["gallery"][0]["url"])
+                            api.delete_gallery_image(
+                                d["gallery_file"], p["gallery"][0]["url"]
+                            )
                         except Exception:
                             pass
-                    api.add_gallery_image(s, GalleryImage(
-                        image_path=gallery_file,
-                        ext=gallery_file.suffix.lstrip("."),
-                        featured=True,
-                        title=d["gallery_title"],
-                        description=d["gallery_description"]
-                    ))
+                    api.add_gallery_image(
+                        s,
+                        GalleryImage(
+                            image_path=gallery_file,
+                            ext=gallery_file.suffix.lstrip("."),
+                            featured=True,
+                            title=d["gallery_title"],
+                            description=d["gallery_description"],
+                        ),
+                    )
 
                 if m in [UpdateMode.ALL, UpdateMode.DATA, UpdateMode.BODY]:
                     refreshed = api.get_project(s)
-                    gallery_url = refreshed["gallery"][0]["url"] if refreshed.get("gallery") else None
-                    new_body = appy_modrinth_markdown_template(d["body"], context={"upload_gallery_url": gallery_url})
+                    gallery_url = (
+                        refreshed["gallery"][0]["url"]
+                        if refreshed.get("gallery")
+                        else None
+                    )
+                    new_body = appy_modrinth_markdown_template(
+                        d["body"], context={"upload_gallery_url": gallery_url}
+                    )
 
                     update_payload = ProjectUpdate()
 
@@ -230,7 +299,9 @@ def update(mode: UpdateMode = typer.Argument(..., help="What to update: icon, ga
                         update_payload.title = d["name"]
                         update_payload.description = d["summary"]
                         update_payload.categories = d["primary_categories"].split(" ")
-                        update_payload.additional_categories = d["additional_categories"].split(" ")
+                        update_payload.additional_categories = d[
+                            "additional_categories"
+                        ].split(" ")
                         update_payload.issues_url = d["issue_url"]
                         update_payload.source_url = d["source_url"]
                         update_payload.discord_url = d["discord_url"]
@@ -243,7 +314,12 @@ def update(mode: UpdateMode = typer.Argument(..., help="What to update: icon, ga
                 return {"slug": s, "dir_name": dir_name, "success": True}
 
             except ModrinthAPIError as e:
-                return {"slug": s, "dir_name": dir_name, "success": False, "ModrinthAPIError": e}
+                return {
+                    "slug": s,
+                    "dir_name": dir_name,
+                    "success": False,
+                    "ModrinthAPIError": e,
+                }
 
         logger.info(f"[{project_dir.name}] Queued for update ({mode.value})...")
         queue.append(_update_task)
@@ -252,29 +328,34 @@ def update(mode: UpdateMode = typer.Argument(..., help="What to update: icon, ga
         results = api.parallel_requests(queue)
         for res in results:
             if not res["success"]:
-                logger.error(f"[{res.get('dir_name')}] Update failed: {res.get('ModrinthAPIError')}")
+                logger.error(
+                    f"[{res.get('dir_name')}] Update failed: {res.get('ModrinthAPIError')}"
+                )
             else:
                 logger.info(f"[{res.get('dir_name')}] Update successful.")
 
 
 @app.command()
-def publish():
-    api = get_api()
-    existing_projects, _ = fetch_org_projects(api)
+def publish(ctx: typer.Context):
+    settings = get_config(ctx)
+    api = get_api(settings)
+    existing_projects, _ = fetch_org_projects(api, settings)
     game_versions = api.get_game_versions()
 
     try:
-        meta = settings.load_json(settings.META_PATH)
+        meta = settings.load_json(settings.meta_path)
     except Exception:
         return
 
     queue = []
 
-    for project_dir in settings.BUILD_DIR.iterdir():
-        if not project_dir.is_dir(): continue
+    for project_dir in settings.build_dir.iterdir():
+        if not project_dir.is_dir():
+            continue
 
         data = load_project_data(project_dir)
-        if not data: continue
+        if not data:
+            continue
 
         slug = data.get("slug")
         project = existing_projects.get(slug)
@@ -283,7 +364,9 @@ def publish():
             logger.warning(f"[{project_dir.name}] Not on Modrinth, cannot publish.")
             continue
 
-        def _publish_task(d=data, p_dir=project_dir, proj=project):
+        def _publish_task(d=None, p_dir=project_dir, proj=project):
+            if d is None:
+                d = data
             dir_name = p_dir.name
             try:
                 raw_name = f"{str(d['name']).replace(meta['redundant_removable_info'], '')} {d['version_version']}"
@@ -297,7 +380,9 @@ def publish():
 
                 logger.debug(f"[{d['slug']}] Version name: {version_name}")
 
-                gv = get_game_versions_until_cutoff(d["version_game_version_cutoff"], game_versions)
+                gv = get_game_versions_until_cutoff(
+                    d["version_game_version_cutoff"], game_versions
+                )
 
                 result = api.create_version(
                     NewVersion(
@@ -307,13 +392,23 @@ def publish():
                         loaders=["minecraft"],
                         version_type=VersionType.RELEASE,
                         dependencies=[],
-                        game_versions=gv
+                        game_versions=gv,
                     ),
-                    file_paths=[p_dir / d["version_file"]]
+                    file_paths=[p_dir / d["version_file"]],
                 )
-                return {"slug": d["slug"], "dir_name": dir_name, "success": True, "result": result}
+                return {
+                    "slug": d["slug"],
+                    "dir_name": dir_name,
+                    "success": True,
+                    "result": result,
+                }
             except ModrinthAPIError as e:
-                return {"slug": d["slug"], "dir_name": dir_name, "success": False, "ModrinthAPIError": e}
+                return {
+                    "slug": d["slug"],
+                    "dir_name": dir_name,
+                    "success": False,
+                    "ModrinthAPIError": e,
+                }
 
         logger.info(f"[{project_dir.name}] Queued for publish...")
         queue.append(_publish_task)
@@ -324,13 +419,17 @@ def publish():
             if res["success"]:
                 logger.info(f"[{res.get('dir_name')}] Published successfully.")
             else:
-                logger.error(f"[{res.get('dir_name')}] Publish failed: {res.get('ModrinthAPIError')}")
+                logger.error(
+                    f"[{res.get('dir_name')}] Publish failed: {res.get('ModrinthAPIError')}"
+                )
 
 
 @app.command()
-def update_mc_versions():
-    api = get_api()
-    existing_projects, _ = fetch_org_projects(api)
+def update_mc_versions(ctx: typer.Context):
+    settings = get_config(ctx)
+
+    api = get_api(settings)
+    existing_projects, _ = fetch_org_projects(api, settings)
     game_versions = api.get_game_versions()
     queue = []
 
@@ -338,8 +437,9 @@ def update_mc_versions():
         local_data = None
         local_dir_name = slug
 
-        for p_dir in settings.BUILD_DIR.iterdir():
-            if not p_dir.is_dir(): continue
+        for p_dir in settings.build_dir.iterdir():
+            if not p_dir.is_dir():
+                continue
             d = load_project_data(p_dir)
             if d.get("slug") == slug:
                 local_data = d
@@ -356,13 +456,24 @@ def update_mc_versions():
                 if isinstance(p.get("versions"), list) and len(p.get("versions")) > 0:
                     vid = p.get("versions")[0]
                 else:
-                    return {"slug": d["slug"], "success": False, "ModrinthAPIError": "No versions found"}
+                    return {
+                        "slug": d["slug"],
+                        "success": False,
+                        "ModrinthAPIError": "No versions found",
+                    }
 
-                gv = get_game_versions_until_cutoff(d["version_game_version_cutoff"], game_versions)
+                gv = get_game_versions_until_cutoff(
+                    d["version_game_version_cutoff"], game_versions
+                )
                 api.modify_version(vid, VersionUpdate(game_versions=gv))
                 return {"slug": d["slug"], "dir_name": dirname, "success": True}
             except ModrinthAPIError as e:
-                return {"slug": d["slug"], "dir_name": dirname, "success": False, "ModrinthAPIError": e}
+                return {
+                    "slug": d["slug"],
+                    "dir_name": dirname,
+                    "success": False,
+                    "ModrinthAPIError": e,
+                }
 
         logger.info(f"[{local_dir_name}] Queued for version list update...")
         queue.append(_update_vers_task)
@@ -373,13 +484,17 @@ def update_mc_versions():
             if res["success"]:
                 logger.info(f"[{res.get('dir_name')}] Versions updated.")
             else:
-                logger.error(f"[{res.get('dir_name')}] Version update failed: {res.get('ModrinthAPIError')}")
+                logger.error(
+                    f"[{res.get('dir_name')}] Version update failed: {res.get('ModrinthAPIError')}"
+                )
 
 
 @app.command()
-def submit():
-    api = get_api()
-    existing_projects, _ = fetch_org_projects(api)
+def submit(ctx: typer.Context):
+    settings = get_config(ctx)
+
+    api = get_api(settings)
+    existing_projects, _ = fetch_org_projects(api, settings)
     queue = []
 
     for slug, project in existing_projects.items():
@@ -392,7 +507,12 @@ def submit():
                 api.modify_project(p["id"], ProjectUpdate(status="processing"))
                 return {"slug": s, "dir_name": s, "success": True}
             except ModrinthAPIError as e:
-                return {"slug": s, "dir_name": s, "success": False, "ModrinthAPIError": e}
+                return {
+                    "slug": s,
+                    "dir_name": s,
+                    "success": False,
+                    "ModrinthAPIError": e,
+                }
 
         logger.info(f"[{slug}] Queued for submit...")
         queue.append(_submit_task)
@@ -401,26 +521,84 @@ def submit():
         results = api.parallel_requests(queue)
         for res in results:
             if not res["success"]:
-                logger.error(f"[{res.get('slug')}] Submit failed: {res.get('ModrinthAPIError')}")
+                logger.error(
+                    f"[{res.get('slug')}] Submit failed: {res.get('ModrinthAPIError')}"
+                )
             else:
                 logger.info(f"[{res.get('slug')}] Submitted.")
 
 
 @app.command()
-def cleanup(mode: CleanupMode = typer.Argument(..., help="Modes: 'non-draft' (deletes non-draft folders) or 'published' (deletes if version exists)")):
-    if not settings.BUILD_DIR.is_dir(): return
+def deprecate(
+    ctx: typer.Context,
+    regex: str = typer.Argument(..., help="What to deprecate (regex)"),
+):
+    settings = get_config(ctx)
 
-    api = get_api()
-    existing_projects, _ = fetch_org_projects(api)
+    api = get_api(settings)
+    existing_projects, _ = fetch_org_projects(api, settings)
+    queue = []
+    regex = re.compile(regex)
+
+    for slug, project in existing_projects.items():
+        if project.get("status") == "unlisted":
+            logger.info(f"[{slug}] Already unlisted.")
+            continue
+        if not regex.match(project.get("slug")):
+            logger.info(f"[{slug}] Slug doesn't match. Skipping.")
+            continue
+
+        def _submit_task(s=slug, p=project):
+            try:
+                api.modify_project(p["id"], ProjectUpdate(status="unlisted"))
+                return {"slug": s, "dir_name": s, "success": True}
+            except ModrinthAPIError as e:
+                return {
+                    "slug": s,
+                    "dir_name": s,
+                    "success": False,
+                    "ModrinthAPIError": e,
+                }
+
+        logger.info(f"[{slug}] Queued for deprecation...")
+        queue.append(_submit_task)
+
+    if queue:
+        results = api.parallel_requests(queue)
+        for res in results:
+            if not res["success"]:
+                logger.error(
+                    f"[{res.get('slug')}] Deprecation failed: {res.get('ModrinthAPIError')}"
+                )
+            else:
+                logger.info(f"[{res.get('slug')}] deprecated.")
+
+
+@app.command()
+def cleanup(
+    ctx: typer.Context,
+    mode: CleanupMode = typer.Argument(
+        ...,
+        help="Modes: 'non-draft' (deletes non-draft folders) or 'published' (deletes if version exists)",
+    ),
+):
+    settings = get_config(ctx)
+    if not settings.build_dir.is_dir():
+        return
+
+    api = get_api(settings)
+    existing_projects, _ = fetch_org_projects(api, settings)
     deleted_count = 0
 
     import shutil
 
-    for project_dir in settings.BUILD_DIR.iterdir():
-        if not project_dir.is_dir(): continue
+    for project_dir in settings.build_dir.iterdir():
+        if not project_dir.is_dir():
+            continue
 
         data = load_project_data(project_dir)
-        if not data: continue
+        if not data:
+            continue
 
         slug = data.get("slug")
         project = existing_projects.get(slug)
@@ -441,7 +619,9 @@ def cleanup(mode: CleanupMode = typer.Argument(..., help="Modes: 'non-draft' (de
                     published_vers = [v["version_number"] for v in versions]
                     if current_ver in published_vers:
                         should_delete = True
-                        logger.info(f"[{project_dir.name}] Version {current_ver} already published.")
+                        logger.info(
+                            f"[{project_dir.name}] Version {current_ver} already published."
+                        )
                 except ModrinthAPIError:
                     pass
 

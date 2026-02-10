@@ -1,55 +1,98 @@
 import json
 import os
+from dataclasses import dataclass, asdict
 from pathlib import Path
+
+import typer
 from dotenv import load_dotenv
 from pridexyz.logger import get_logger
-
-# Load environment variables once
-load_dotenv()
 
 logger = get_logger("pridexyz.system")
 
 
+@dataclass
 class Config:
-    BASE_DIR = Path(__file__).parent.parent
-    SRC_DIR = BASE_DIR / 'src'
-    BUILD_DIR = BASE_DIR / 'build'
+    base_dir: Path
+    src_dir: Path
+    build_dir: Path
 
-    # Files
-    COLORS_PATH = SRC_DIR / 'colors.json'
-    META_PATH = SRC_DIR / 'meta.json'
-    ORGS_PATH = SRC_DIR / 'orgs.json'
+    colors_path: Path
+    meta_path: Path
+    orgs_path: Path
 
-    # Env Vars
-    BUILD_USER = os.getenv('BUILD_USER', 'Unknown')
-    MODRINTH_TOKEN = os.getenv("MODRINTH_TOKEN")
-    MODRINTH_API_URL = os.getenv("MODRINTH_API_URL")
-    DEBUG_LOGGING = os.getenv("MODRINTH_API_ENABLE_DEBUG_LOGGING", "false").lower() == "true"
+    build_user: str
+    modrinth_token: str | None
+    modrinth_api_url: str | None
+    debug_logging: bool
 
     @classmethod
-    def load_json(cls, path: Path):
+    def load(
+        cls,
+        *,
+        env_file: Path | None = None,
+        base_dir: Path | None = None,
+        mr_debug_logging: bool | None = None,
+    ) -> Config:
+
+        if env_file:
+            logger.info(f"Loading env file: {env_file}")
+            load_dotenv(env_file, override=True)
+        else:
+            load_dotenv()
+
+        base_dir = base_dir or Path(__file__).parent.parent.parent
+        src_dir = base_dir / "src"
+        build_dir = base_dir / "build"
+
+        return cls(
+            base_dir=base_dir,
+            src_dir=src_dir,
+            build_dir=build_dir,
+            colors_path=src_dir / "colors.json",
+            meta_path=src_dir / "meta.json",
+            orgs_path=src_dir / "orgs.json",
+            build_user=os.getenv("BUILD_USER", "Unknown"),
+            modrinth_token=os.getenv("MODRINTH_TOKEN"),
+            modrinth_api_url=os.getenv("MODRINTH_API_URL"),
+            debug_logging=(
+                mr_debug_logging
+                if mr_debug_logging is not None
+                else os.getenv("MODRINTH_API_ENABLE_DEBUG_LOGGING", "false").lower()
+                == "true"
+            ),
+        )
+
+    def get_org_lookup(self) -> dict[str, str]:
+        orgs_env_lookup = self.load_json(self.orgs_path)
+        org_id_lookup = {}
+
+        for org_key, org_env_key in orgs_env_lookup.items():
+            org_id = os.getenv(org_env_key)
+            if org_id:
+                org_id_lookup[org_key] = org_id
+            else:
+                logger.warning(
+                    f"Missing environment variable {org_env_key} for org {org_key}"
+                )
+
+        return org_id_lookup
+
+    @staticmethod
+    def load_json(path: Path):
         if not path.exists():
             logger.error(f"Configuration file not found: {path}")
-            raise FileNotFoundError(f"{path} does not exist")
-        with open(path, 'r') as f:
-            return json.load(f)
+            raise FileNotFoundError(path)
+        return json.loads(path.read_text())
 
-    @classmethod
-    def get_org_lookup(cls):
-        """Resolves Org names to IDs based on orgs.json and .env"""
-        try:
-            orgs_env_lookup = cls.load_json(cls.ORGS_PATH)
-            org_id_lookup = {}
-            for org_key, org_env_key in orgs_env_lookup.items():
-                org_id = os.getenv(org_env_key)
-                if org_id:
-                    org_id_lookup[org_key] = org_id
-                else:
-                    logger.warning(f"Missing environment variable {org_env_key} for org {org_key}")
-            return org_id_lookup
-        except Exception as e:
-            logger.error(f"Failed to load organization lookup: {e}")
-            return {}
+    def as_debug_dict(self) -> dict:
+        data = asdict(self)
+
+        for key, value in data.items():
+            if isinstance(value, Path):
+                data[key] = str(value.resolve())
+
+        return data
 
 
-settings = Config()
+def get_config(ctx: typer.Context) -> Config:
+    return ctx.obj["config"]

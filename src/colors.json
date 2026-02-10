@@ -126,25 +126,8 @@
 		]
 	},
 	"nonbinary": {
-		"version": 1,
+		"version": 2,
 		"description_name": "Non-binary Pride Flag",
-		"tooltip": {
-			"styles": [
-				"4clr-full",
-				"4clr-frame",
-				"4clr-frame-altbg"
-			]
-		},
-		"colors": [
-			"#FFF433",
-			"#FFFFFF",
-			"#9B59D0",
-			"#2D2D2D"
-		]
-	},
-	"nonbinary-alt": {
-		"version": 1,
-		"description_name": "Alt Non-binary Pride Flag",
 		"tooltip": {
 			"styles": [
 				"4clr-full",
@@ -1204,5 +1187,24 @@
 		"colors": [
 			"#006400"
 		]
+	},
+	"$deprecated": {
+		"nonbinary-alt": {
+			"version": 1,
+			"description_name": "Alt Non-binary Pride Flag",
+			"tooltip": {
+				"styles": [
+					"4clr-full",
+					"4clr-frame",
+					"4clr-frame-altbg"
+				]
+			},
+			"colors": [
+				"#FFF433",
+				"#FFF8E7",
+				"#9B59D0",
+				"#2D2D2D"
+			]
+		}
 	}
 }

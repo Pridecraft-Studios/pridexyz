@@ -163,10 +163,7 @@ def create(ctx: typer.Context):
         if not check_files(project_dir, data):
             continue
 
-        # Closure for parallel execution
-        def _create_task(d=None, p_dir=project_dir):
-            if d is None:
-                d = data
+        def _create_task(d=data, p_dir=project_dir):
             dir_name = p_dir.name
             try:
                 org_id = org_lookup.get(d["org_id_source"])
@@ -243,9 +240,7 @@ def update(
             )
             continue
 
-        def _update_task(d=None, p_dir=project_dir, p=project, m=mode):
-            if d is None:
-                d = data
+        def _update_task(d=data, p_dir=project_dir, p=project, m=mode):
             dir_name = p_dir.name
             s = d["slug"]
 
@@ -365,13 +360,13 @@ def publish(ctx: typer.Context):
             logger.warning(f"[{project_dir.name}] Not on Modrinth, cannot publish.")
             continue
 
-        def _publish_task(d=None, p_dir=project_dir, proj=project):
-            if d is None:
-                d = data
+        def _publish_task(d=data, p_dir=project_dir, proj=project):
             dir_name = p_dir.name
             try:
-                raw_name = f"{str(d['name']).replace(meta['redundant_removable_info'], '')} {d['version_version']}"
-                version_name = raw_name
+                version_name = f"{str(d['name'])} {d['version_version']}"
+
+                for removable in meta.get("removable", {}):
+                    version_name = version_name.replace(removable, "")
 
                 for replaceable, replacement in meta.get("shortenable", {}).items():
                     if len(version_name) > 64:
@@ -450,9 +445,7 @@ def update_mc_versions(ctx: typer.Context):
         if not local_data:
             continue
 
-        def _update_vers_task(d=None, p=project, dirname=local_dir_name):
-            if d is None:
-                d = local_data
+        def _update_vers_task(d=local_data, p=project, dirname=local_dir_name):
             try:
                 if isinstance(p.get("versions"), list) and len(p.get("versions")) > 0:
                     vid = p.get("versions")[0]

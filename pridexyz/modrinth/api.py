@@ -76,13 +76,13 @@ class ModrinthAPI:
         self._log_debug(f"\n{'-' * 20} [DEBUG REQUEST] {'-' * 20}")
         self._log_debug(f"{prepped.method} {prepped.url}")
 
-        self._log_debug("\n[HEADERS]")
+        self._log_debug("[HEADERS]")
         for k, v in prepped.headers.items():
             if k.lower() == "authorization":
                 v = f"{v[:10]}..." if len(v) > 10 else "***"
             self._log_debug(f"{k}: {v}")
 
-        self._log_debug("\n[BODY]")
+        self._log_debug("[BODY]")
         if prepped.body is None:
             self._log_debug("(None)")
         else:

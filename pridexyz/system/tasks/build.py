@@ -34,6 +34,8 @@ def build_packs(ctx: typer.Context):
 
     district_pack_count = 0
     for palette_name, palette in colors.items():
+        if palette_name.startswith("$"):
+            continue
         clean_name = palette_name.split("/")[0]
         logger.info(f"Processing palette '{clean_name}'")
         palette_colors = [convert_hex_to_rgb(c) for c in palette["colors"]]

@@ -5,6 +5,7 @@ from pathlib import Path
 
 import typer
 from dotenv import load_dotenv
+
 from pridexyz.logger import get_logger
 
 logger = get_logger("pridexyz.system")
@@ -23,7 +24,8 @@ class Config:
     build_user: str
     modrinth_token: str | None
     modrinth_api_url: str | None
-    debug_logging: bool
+    mr_api_debug_logging: bool
+    mr_api_extended_debug_logging: bool
 
     @classmethod
     def load(
@@ -31,7 +33,8 @@ class Config:
         *,
         env_file: Path | None = None,
         base_dir: Path | None = None,
-        mr_debug_logging: bool | None = None,
+        mr_api_debug_logging: bool | None = None,
+        mr_api_extended_debug_logging: bool,
     ) -> Config:
 
         if env_file:
@@ -54,12 +57,13 @@ class Config:
             build_user=os.getenv("BUILD_USER", "Unknown"),
             modrinth_token=os.getenv("MODRINTH_TOKEN"),
             modrinth_api_url=os.getenv("MODRINTH_API_URL"),
-            debug_logging=(
-                mr_debug_logging
-                if mr_debug_logging is not None
+            mr_api_debug_logging=(
+                mr_api_debug_logging
+                if mr_api_debug_logging is not None
                 else os.getenv("MODRINTH_API_ENABLE_DEBUG_LOGGING", "false").lower()
                 == "true"
             ),
+            mr_api_extended_debug_logging=mr_api_extended_debug_logging,
         )
 
     def get_org_lookup(self) -> dict[str, str]:

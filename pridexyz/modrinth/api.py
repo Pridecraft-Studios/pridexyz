@@ -54,6 +54,7 @@ class ModrinthAPI:
         api_url: str = "https://api.modrinth.com",
         user_agent: str = "requests/2.32.5",
         enable_debug_logging=False,
+        enable_extended_debug_logging: bool = False,
     ) -> None:
         self.api_url = api_url
         self.session = requests.Session()
@@ -65,10 +66,45 @@ class ModrinthAPI:
         self._ratelimit_last_checked = time.time()
         self.logger = get_logger(str(self.__hash__()))
         self.enable_debug_logging = enable_debug_logging
+        self.extended_debug = enable_extended_debug_logging
 
     def _log_debug(self, message: str, **kwargs) -> None:
         if self.enable_debug_logging:
             self.logger.debug(message, **kwargs)
+
+    def _pretty_print_request(self, prepped: requests.PreparedRequest) -> None:
+        self._log_debug(f"\n{'-' * 20} [DEBUG REQUEST] {'-' * 20}")
+        self._log_debug(f"{prepped.method} {prepped.url}")
+
+        self._log_debug("\n[HEADERS]")
+        for k, v in prepped.headers.items():
+            if k.lower() == "authorization":
+                v = f"{v[:10]}..." if len(v) > 10 else "***"
+            self._log_debug(f"{k}: {v}")
+
+        self._log_debug("\n[BODY]")
+        if prepped.body is None:
+            self._log_debug("(None)")
+        else:
+            content_type = prepped.headers.get("Content-Type", "")
+            if "json" in content_type.lower() and isinstance(prepped.body, bytes):
+                try:
+                    body_str = prepped.body.decode("utf-8")
+                    self._log_debug(json.dumps(json.loads(body_str), indent=2))
+                except Exception:
+                    self._log_debug(f"(Raw bytes): {prepped.body!r}")
+            elif isinstance(prepped.body, str):
+                self._log_debug(prepped.body)
+            else:
+                try:
+                    body_len = len(prepped.body)
+                    preview = str(prepped.body)[:200]
+                    self._log_debug(
+                        f"Binary/Multipart data ({body_len} bytes). Preview:\n{preview}..."
+                    )
+                except Exception:
+                    self._log_debug(f"Binary data (type: {type(prepped.body)})")
+        self._log_debug(f"{'-' * 55}\n")
 
     def _make_session(self) -> requests.Session:
         s = requests.Session()
@@ -152,8 +188,19 @@ class ModrinthAPI:
 
         response = None
         try:
+            req = requests.Request(method, url, **kwargs)
+            prepped = session.prepare_request(req)
+
+            if self.extended_debug:
+                self._pretty_print_request(prepped)
+
+            settings = session.merge_environment_settings(
+                prepped.url, {}, None, None, None
+            )
+
             self._log_debug(f"[REQ] Sending request {method} {url}")
-            response = session.request(method, url, **kwargs)
+
+            response = session.send(prepped, **settings)
 
             self._log_debug(
                 f"[REQ] Got response status={response.status_code}, "

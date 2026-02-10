@@ -18,13 +18,15 @@ def main(
     ctx: typer.Context,
     env_file: Path = typer.Option(None, "--env-file", "-e"),
     base_dir: Path = typer.Option(None),
-    mr_debug_logging: bool = typer.Option(None),
+    mr_api_debug_logging: bool = typer.Option(None),
+    mr_api_extended_debug_logging: bool = typer.Option(False),
 ):
     ctx.ensure_object(dict)
     ctx.obj["config"] = Config.load(
         env_file=env_file,
         base_dir=base_dir,
-        mr_debug_logging=mr_debug_logging,
+        mr_api_debug_logging=mr_api_debug_logging,
+        mr_api_extended_debug_logging=mr_api_extended_debug_logging,
     )
 
 

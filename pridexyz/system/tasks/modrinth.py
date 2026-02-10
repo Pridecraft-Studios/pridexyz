@@ -48,7 +48,8 @@ def get_api(settings: Config) -> ModrinthAPI:
         token=settings.modrinth_token,
         api_url=settings.modrinth_api_url,
         user_agent=f"Pridecraft-Studios/pridexyz ({settings.build_user})",
-        enable_debug_logging=settings.debug_logging,
+        enable_debug_logging=settings.mr_api_debug_logging,
+        enable_extended_debug_logging=settings.mr_api_extended_debug_logging,
     )
 
 

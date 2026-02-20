@@ -113,20 +113,28 @@ class HeartsBuilder(Builder):
                 ).convert("RGBA")
 
                 def lm_shadow_darken_or_adjust(lightness):
-                    lightness_new = np.clip(lightness * 0.91 - ((0.01 / lightness) / 2.6), a_min=0, a_max=1)
+                    lightness_new = np.clip(
+                        lightness * 0.91 - ((0.01 / lightness) / 2.6), a_min=0, a_max=1
+                    )
                     delta_lightness_new = lightness - lightness_new
                     # self.debug(f"lm shadow lightness delta_lightness_new: {delta_lightness_new}")
                     if delta_lightness_new < 0.05 and lightness < 0.07:
-                        self.debug(f"Adjusting lm shadow lightness to {lightness_new + 0.38}")
+                        self.debug(
+                            f"Adjusting lm shadow lightness to {lightness_new + 0.38}"
+                        )
                         return lightness_new + 0.48
                     return lightness_new
 
                 def lm_hardcore_darken_or_adjust(lightness):
-                    lightness_new = np.clip(lightness * 0.71 - ((0.01 / lightness) / 1.8), a_min=0, a_max=1)
+                    lightness_new = np.clip(
+                        lightness * 0.71 - ((0.01 / lightness) / 1.8), a_min=0, a_max=1
+                    )
                     delta_lightness_new = lightness - lightness_new
                     # self.debug(f"lm hardcore lightness delta_lightness_new: {delta_lightness_new}")
                     if delta_lightness_new < 0.09 and lightness < 0.1:
-                        self.debug(f"Adjusting lm hardcore lightness to {lightness_new + 0.45}")
+                        self.debug(
+                            f"Adjusting lm hardcore lightness to {lightness_new + 0.45}"
+                        )
                         return lightness_new + 0.55
                     return lightness_new
 
@@ -206,7 +214,7 @@ class HeartsBuilder(Builder):
 
                 # Metadata + resources
                 create_pack_metadata(
-                    build_zip_collect_path / "pack.mcmeta", pack_friendly_name
+                    build_zip_collect_path / "pack.mcmeta", pack_friendly_name, 18
                 )
 
                 self.debug("Generating pack.png & gallery image")
@@ -223,7 +231,36 @@ class HeartsBuilder(Builder):
                 pack_png = Image.alpha_composite(pack_png_bg, full_default_sprite)
 
                 # Compose unscaled gallery
-                pack_gallery.alpha_composite(pack_png, (50, 10))
+                for i in range(0, 8):
+                    pack_gallery.alpha_composite(
+                        full_default_sprite, (35 + (8 * i), 10)
+                    )
+
+                pack_gallery.alpha_composite(half_default_sprite, (35 + (8 * 8), 10))
+
+                for i in range(0, 9):
+                    pack_gallery.alpha_composite(
+                        full_hardcore_sprite, (35 + (8 * i), 21)
+                    )
+
+                pack_gallery.alpha_composite(half_hardcore_sprite, (35 + (8 * 9), 21))
+
+                for i in range(0, 3):
+                    pack_gallery.alpha_composite(
+                        full_default_sprite, (35 + (8 * i), 32)
+                    )
+
+                pack_gallery.alpha_composite(
+                    full_default_blinking_sprite, (35 + (8 * 3), 32)
+                )
+                pack_gallery.alpha_composite(
+                    half_default_sprite, (35 + (8 * 3), 32)
+                )
+
+                for i in range(0, 5):
+                    pack_gallery.alpha_composite(
+                        full_default_blinking_sprite, (67 + (8 * i), 32)
+                    )
 
                 # Scale up unscaled pack png
                 pack_png = pack_png.resize(

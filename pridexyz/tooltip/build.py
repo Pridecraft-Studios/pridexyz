@@ -219,7 +219,7 @@ class TooltipBuilder(Builder):
 
                     Path(build_out_path / "modrinth.md").write_text(
                         appy_modrinth_markdown_template(
-                            Path(self.src_dir / "resources" / "modrinth.md").read_text(
+                            Path(self.src_dir / "modrinth.md").read_text(
                                 encoding="utf-8"
                             ),
                             context,

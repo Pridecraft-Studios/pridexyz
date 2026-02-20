@@ -4,10 +4,7 @@ from datetime import datetime
 
 from pridexyz.system.config import logger, get_config
 
-app = typer.Typer()
 
-
-@app.command(name="run")
 def clean_build(ctx: typer.Context):
     settings = get_config(ctx)
 

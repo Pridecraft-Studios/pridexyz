@@ -9,6 +9,12 @@
 				"3clr-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"3clr",
+				"3clr-vert"
+			]
+		},
 		"colors": [
 			"#d60270",
 			"#9b4f96",
@@ -23,6 +29,12 @@
 				"3clr-full",
 				"3clr-frame",
 				"3clr-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"3clr",
+				"3clr-vert"
 			]
 		},
 		"colors": [
@@ -41,6 +53,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#1bd96a"
 		]
@@ -53,6 +70,12 @@
 				"7clr-full",
 				"7clr-frame",
 				"7clr-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"7clr",
+				"7clr-vert"
 			]
 		},
 		"colors": [
@@ -75,6 +98,12 @@
 				"3clr-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"3clr",
+				"3clr-vert"
+			]
+		},
 		"colors": [
 			"#F714BA",
 			"#01D66A",
@@ -87,6 +116,10 @@
 		"tooltip": {
 			"styles": [
 				"split-mono-bg-frame"
+			]
+		},
+		"hearts": {
+			"styles": [
 			]
 		},
 		"colors": [
@@ -117,6 +150,13 @@
 				"5clr-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"5clr",
+				"5clr-vert",
+				"5clr-vert-alt"
+			]
+		},
 		"colors": [
 			"#018e71",
 			"#99e9c2",
@@ -133,6 +173,12 @@
 				"4clr-full",
 				"4clr-frame",
 				"4clr-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"4clr",
+				"4clr-vert"
 			]
 		},
 		"colors": [
@@ -152,6 +198,12 @@
 				"4clr-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"4clr",
+				"4clr-vert"
+			]
+		},
 		"colors": [
 			"#232323",
 			"#a4a5a4",
@@ -169,6 +221,12 @@
 				"4clr-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"4clr",
+				"4clr-vert"
+			]
+		},
 		"colors": [
 			"#151847",
 			"#7657ae",
@@ -184,6 +242,13 @@
 				"5clr-full",
 				"5clr-frame",
 				"5clr-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"5clr",
+				"5clr-vert",
+				"5clr-vert-alt"
 			]
 		},
 		"colors": [
@@ -204,6 +269,13 @@
 				"5clr-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"5clr",
+				"5clr-vert",
+				"5clr-vert-alt"
+			]
+		},
 		"colors": [
 			"#3f9f52",
 			"#97cf7c",
@@ -220,6 +292,13 @@
 				"5clr-full",
 				"5clr-frame",
 				"5clr-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"5clr",
+				"5clr-vert",
+				"5clr-vert-alt"
 			]
 		},
 		"colors": [
@@ -240,6 +319,13 @@
 				"5clr-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"5clr",
+				"5clr-vert",
+				"5clr-vert-alt"
+			]
+		},
 		"colors": [
 			"#5f2263",
 			"#b69ed0",
@@ -258,6 +344,13 @@
 				"5clr-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"5clr",
+				"5clr-vert",
+				"5clr-vert-alt"
+			]
+		},
 		"colors": [
 			"#2b3b7f",
 			"#c593e5",
@@ -274,6 +367,12 @@
 				"7clr-full",
 				"7clr-frame",
 				"7clr-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"7clr",
+				"7clr-vert"
 			]
 		},
 		"colors": [
@@ -296,6 +395,13 @@
 				"5clr-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"5clr",
+				"5clr-vert",
+				"5clr-vert-alt"
+			]
+		},
 		"colors": [
 			"#189fd3",
 			"#fabe93",
@@ -312,6 +418,13 @@
 				"5clr-full",
 				"5clr-frame",
 				"5clr-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"5clr",
+				"5clr-vert",
+				"5clr-vert-alt"
 			]
 		},
 		"colors": [
@@ -332,6 +445,12 @@
 				"3clr-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"3clr",
+				"3clr-vert"
+			]
+		},
 		"colors": [
 			"#b87fd4",
 			"#ffffff",
@@ -346,6 +465,13 @@
 				"5clr-full",
 				"5clr-frame",
 				"5clr-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"5clr",
+				"5clr-vert",
+				"5clr-vert-alt"
 			]
 		},
 		"colors": [
@@ -364,6 +490,12 @@
 				"7clr-full",
 				"7clr-frame",
 				"7clr-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"7clr",
+				"7clr-vert"
 			]
 		},
 		"colors": [
@@ -386,6 +518,13 @@
 				"5clr-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"5clr",
+				"5clr-vert",
+				"5clr-vert-alt"
+			]
+		},
 		"colors": [
 			"#fd8caa",
 			"#fbf2fa",
@@ -404,6 +543,12 @@
 				"3clr-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"3clr",
+				"3clr-vert"
+			]
+		},
 		"colors": [
 			"#fd8caa",
 			"#fbf2fa",
@@ -418,6 +563,13 @@
 				"5clr-full",
 				"5clr-frame",
 				"5clr-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"5clr",
+				"5clr-vert",
+				"5clr-vert-alt"
 			]
 		},
 		"colors": [
@@ -438,6 +590,12 @@
 				"3clr-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"3clr",
+				"3clr-vert"
+			]
+		},
 		"colors": [
 			"#5bcffa",
 			"#f5abb9",
@@ -452,6 +610,12 @@
 				"7clr-full",
 				"7clr-frame",
 				"7clr-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"7clr",
+				"7clr-vert"
 			]
 		},
 		"colors": [
@@ -474,6 +638,12 @@
 				"7clr-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"7clr",
+				"7clr-vert"
+			]
+		},
 		"colors": [
 			"#c982a5",
 			"#edaacb",
@@ -494,6 +664,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#0038a8"
 		]
@@ -506,6 +681,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -522,6 +702,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#9ff902"
 		]
@@ -536,6 +721,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#d52d00"
 		]
@@ -548,6 +738,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -577,6 +772,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#00ff00"
 		]
@@ -591,6 +791,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#7bade2"
 		]
@@ -603,6 +808,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -632,6 +842,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#ffd800"
 		]
@@ -646,6 +861,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#232323"
 		]
@@ -658,6 +878,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -685,6 +910,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -727,6 +957,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#eae8ca"
 		]
@@ -752,6 +987,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -794,6 +1034,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#f5abb9"
 		]
@@ -806,6 +1051,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -822,6 +1072,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#00ffff"
 		]
@@ -834,6 +1089,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -850,6 +1110,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#bababa"
 		]
@@ -862,6 +1127,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -878,6 +1148,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#9afda4"
 		]
@@ -890,6 +1165,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -906,6 +1186,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#ed91b6"
 		]
@@ -918,6 +1203,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -934,6 +1224,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#fd2eb1"
 		]
@@ -946,6 +1241,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -962,6 +1262,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#bee1e3"
 		]
@@ -974,6 +1279,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -990,18 +1300,29 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#a7fcdb"
 		]
 	},
 	"rainbow": {
 		"version": 1,
-		"description_name": "Rainbow",
+		"description_name": "Pastel Rainbow",
 		"tooltip": {
 			"styles": [
 				"7clr-full",
 				"7clr-frame",
 				"7clr-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"7clr",
+				"7clr-vert"
 			]
 		},
 		"colors": [
@@ -1024,6 +1345,12 @@
 				"7clr-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"7clr",
+				"7clr-vert"
+			]
+		},
 		"colors": [
 			"#fc3b65",
 			"#fe8e7e",
@@ -1044,6 +1371,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#a6e8aa"
 		]
@@ -1056,6 +1388,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -1072,6 +1409,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#f9ff91"
 		]
@@ -1084,6 +1426,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -1100,6 +1447,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#fcb96b"
 		]
@@ -1112,6 +1464,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -1128,6 +1485,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#997d65"
 		]
@@ -1140,6 +1502,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -1156,6 +1523,11 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#2E5D9D"
 		]
@@ -1168,6 +1540,11 @@
 				"mono-full",
 				"mono-frame",
 				"mono-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"mono"
 			]
 		},
 		"colors": [
@@ -1184,8 +1561,63 @@
 				"mono-frame-altbg"
 			]
 		},
+		"hearts": {
+			"styles": [
+				"mono"
+			]
+		},
 		"colors": [
 			"#006400"
+		]
+	},
+	"pride-bright": {
+		"version": 1,
+		"description_name": "Pride Flag (Bright Rainbow)",
+		"tooltip": {
+			"styles": [
+				"6clr-full",
+				"6clr-frame",
+				"6clr-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"6clr",
+				"6clr-vert"
+			]
+		},
+		"colors": [
+			"#d63c30",
+			"#e57e33",
+			"#f3ea49",
+			"#3bc41b",
+			"#2476ca",
+			"#ba00a1"
+		]
+	},
+	"pride": {
+		"version": 1,
+		"description_name": "Pride Flag (Rainbow)",
+		"tooltip": {
+			"styles": [
+				"6clr-full",
+				"6clr-frame",
+				"6clr-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"6clr",
+				"6clr-vert"
+			]
+		},
+		"colors": [
+			"#e60805",
+			"#ff8e08",
+			"#ffef0c",
+			"#00821b",
+			"#104aff",
+			"#780089"
 		]
 	},
 	"$deprecated": {

@@ -1,58 +1,13 @@
 from pathlib import Path
 
-import numpy as np
-from PIL import ImageFile, Image
+from PIL import Image
 from PIL.Image import Transpose
 
 from pridexyz.color import (
     RGBColor,
     convert_hex_to_rgb,
-    pil_rgb_to_float_rgb,
-    float_rgb_to_pil_rgb,
 )
-
-
-def generate_image_from_template(
-    template_image: ImageFile.ImageFile,
-    old_colors: list[RGBColor],
-    new_colors: list[RGBColor],
-) -> Image.Image:
-    """
-    Create a new PNG image based on an input image, replacing specified colors with new colors.
-
-    Parameters:
-        template_image (ImageFile): The input image.
-        old_colors (list[RGBColor]): RGB color tuples to replace (0–1 floats).
-        new_colors (list[RGBColor]): RGB color tuples to replace with (same length as 'old_colors').
-
-    Returns:
-        Image: The new templated image.
-    """
-    if len(old_colors) != len(new_colors):
-        raise ValueError(
-            "The length of old_colors and new_colors lists must be the same."
-        )
-
-    pixels = template_image.load()
-    new_image = Image.new("RGBA", template_image.size)
-    new_pixels = new_image.load()
-
-    for y in range(template_image.height):
-        for x in range(template_image.width):
-            r, g, b, a = pixels[x, y]
-
-            current_color_float = pil_rgb_to_float_rgb((r, g, b))
-
-            replacement_color_float = current_color_float
-
-            for target_color, replacement_color in zip(old_colors, new_colors):
-                if np.allclose(current_color_float, target_color):
-                    replacement_color_float = replacement_color
-                    break
-
-            new_pixels[x, y] = (*float_rgb_to_pil_rgb(replacement_color_float), a)
-
-    return new_image
+from pridexyz.common.image_processing import generate_image_from_template
 
 
 def apply_template(

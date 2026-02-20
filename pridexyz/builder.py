@@ -47,7 +47,7 @@ class Builder:
         builders = []
         for builder_class in builder_class_list:
             logger.info(
-                f"Creating builder for '{builder_class.__name__}' ({builder_class.get_name()})"
+                f"Creating '{builder_class.__name__}' ({builder_class.get_name()})"
             )
             builders.append(
                 builder_class(

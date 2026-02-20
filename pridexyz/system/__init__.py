@@ -8,8 +8,8 @@ from pridexyz.system.tasks import build, clean, modrinth
 
 app = typer.Typer(help="PrideXYZ Build & Distribution", no_args_is_help=True)
 
-app.add_typer(build.app, name="build", help="Build resource packs")
-app.add_typer(clean.app, name="clean", help="Clean build artifacts")
+app.command(name="build", help="Build resource packs")(build.build_packs)
+app.command(name="clean", help="Clean build artifacts")(clean.clean_build)
 app.add_typer(modrinth.app, name="modrinth", help="Manage Modrinth projects")
 
 

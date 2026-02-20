@@ -3,57 +3,188 @@
 		"description_name": "Tricolor",
 		"explanation": "A simple tricolor flag with three colors",
 		"version": 1,
-		"expects": 3
+		"expects": 3,
+		"sprite": {
+			"templating_colors": [
+				"#FF0000",
+				"#00FF00",
+				"#0000FF"
+			],
+			"template": "3clr/horizontal.png"
+		}
 	},
 	"3clr-vert": {
 		"description_name": "Tricolor (Vertical)",
 		"explanation": "A simple tricolor vertical flag with three colors",
 		"version": 1,
 		"expects": 3,
-		"vertical": true
+		"sprite": {
+			"templating_colors": [
+				"#FF0000",
+				"#00FF00",
+				"#0000FF"
+			],
+			"template": "3clr/vertical.png"
+		}
 	},
 	"4clr": {
 		"description_name": "4-Color",
 		"explanation": "A simple 4-color flag with four colors",
 		"version": 1,
-		"expects": 4
+		"expects": 4,
+		"sprite": {
+			"templating_colors": [
+				"#FF0000",
+				"#00FF00",
+				"#0000FF",
+				"#FFFF00"
+			],
+			"template": "4clr/horizontal.png"
+		}
 	},
 	"4clr-vert": {
 		"description_name": "4-Color (Vertical)",
 		"explanation": "A simple 4-color vertical flag with four colors",
 		"version": 1,
 		"expects": 4,
-		"vertical": true
+		"sprite": {
+			"templating_colors": [
+				"#FF0000",
+				"#00FF00",
+				"#0000FF",
+				"#FFFF00"
+			],
+			"template": "4clr/vertical.png"
+		}
 	},
 	"5clr": {
 		"description_name": "5-Color",
 		"explanation": "A simple 5-color flag with five colors",
 		"version": 1,
-		"expects": 5
+		"expects": 5,
+		"sprite": {
+			"templating_colors": [
+				"#FF0000",
+				"#00FF00",
+				"#0000FF",
+				"#FFFF00",
+				"#FF00FF"
+			],
+			"template": "5clr/horizontal.png"
+		}
 	},
 	"5clr-vert": {
 		"description_name": "5-Color (Vertical)",
 		"explanation": "A simple 5-color vertical flag with five colors",
 		"version": 1,
 		"expects": 5,
-		"vertical": true
+		"sprite": {
+			"templating_colors": [
+				"#FF0000",
+				"#00FF00",
+				"#0000FF",
+				"#FFFF00",
+				"#FF00FF"
+			],
+			"template": "5clr/vertical.png"
+		}
+	},
+	"5clr-vert-alt": {
+		"description_name": "5-Color (Vertical Alt)",
+		"explanation": "A simple 5-color vertical flag with five colors (alternative arr.)",
+		"version": 1,
+		"expects": 5,
+		"sprite": {
+			"templating_colors": [
+				"#FF0000",
+				"#00FF00",
+				"#0000FF",
+				"#FFFF00",
+				"#FF00FF"
+			],
+			"template": "5clr/vertical_alt.png"
+		}
+	},
+	"6clr": {
+		"description_name": "6-Color",
+		"explanation": "A simple 6-color flag with six colors",
+		"version": 1,
+		"expects": 6,
+		"sprite": {
+			"templating_colors": [
+				"#FF0000",
+				"#00FF00",
+				"#0000FF",
+				"#FFFF00",
+				"#FF00FF",
+				"00FFFF"
+			],
+			"template": "6clr/horizontal.png"
+		}
+	},
+	"6clr-vert": {
+		"description_name": "6-Color (Vertical)",
+		"explanation": "A simple 6-color vertical flag with six colors",
+		"version": 1,
+		"expects": 6,
+		"sprite": {
+			"templating_colors": [
+				"#FF0000",
+				"#00FF00",
+				"#0000FF",
+				"#FFFF00",
+				"#FF00FF",
+				"00FFFF"
+			],
+			"template": "6clr/vertical.png"
+		}
 	},
 	"7clr": {
 		"description_name": "7-Color",
 		"explanation": "A simple 7-color flag with seven colors",
 		"version": 1,
-		"expects": 7
+		"expects": 7,
+		"sprite": {
+			"templating_colors": [
+				"#FF0000",
+				"#00FF00",
+				"#0000FF",
+				"#FFFF00",
+				"#FF00FF",
+				"#00FFFF",
+				"#FFFFFF"
+			],
+			"template": "7clr/horizontal.png"
+		}
 	},
 	"7clr-vert": {
 		"description_name": "7-Color (Vertical)",
 		"explanation": "A simple 7-color vertical flag with seven colors",
 		"version": 1,
 		"expects": 7,
-		"vertical": true
+		"sprite": {
+			"templating_colors": [
+				"#FF0000",
+				"#00FF00",
+				"#0000FF",
+				"#FFFF00",
+				"#FF00FF",
+				"#00FFFF",
+				"#FFFFFF"
+			],
+			"template": "7clr/vertical.png"
+		}
 	},
 	"mono": {
 		"description_name": "Monochrome",
 		"explanation": "A simple monochrome style with one color",
-		"version": 1
+		"version": 1,
+		"expects": 1,
+		"sprite": {
+			"templating_colors": [
+				"#0000FF"
+			],
+			"template": "mono/mask.png"
+		}
 	}
 }

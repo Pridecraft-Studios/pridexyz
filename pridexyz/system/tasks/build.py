@@ -4,14 +4,22 @@ import typer
 
 from pridexyz.builder import Builder
 from pridexyz.color import convert_hex_to_rgb
+from pridexyz.hearts.build import HeartsBuilder
 from pridexyz.system.config import get_config, logger
 from pridexyz.tooltip.build import TooltipBuilder
 
-app = typer.Typer()
+AVAILABLE_BUILDERS = {
+    "hearts": HeartsBuilder,
+    "tooltip": TooltipBuilder,
+}
 
 
-@app.command(name="run")
-def build_packs(ctx: typer.Context):
+def build_packs(
+    ctx: typer.Context,
+    use_builders: str = typer.Option(
+        "hearts,tooltip", help="Comma-separated list of builders to run"
+    ),
+):
     settings = get_config(ctx)
 
     start_time = datetime.now()
@@ -29,7 +37,13 @@ def build_packs(ctx: typer.Context):
         settings.build_dir,
         settings.build_user,
         meta,
-        [TooltipBuilder],
+        [
+            AVAILABLE_BUILDERS[builder_name]
+            for builder_name in (
+                builder_names.strip() for builder_names in use_builders.split(",")
+            )
+            if builder_name in AVAILABLE_BUILDERS
+        ],
     )
 
     district_pack_count = 0

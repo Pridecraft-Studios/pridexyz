@@ -1,11 +1,11 @@
 import colour
 import numpy as np
 from PIL import Image
-from colour.hints import ArrayLike as ColourArrayLike
 from colour.models import RGB_COLOURSPACE_sRGB
+from numpy.typing import NDArray
 
-OkLabColor = ColourArrayLike
-RGBColor = ColourArrayLike
+OkLabColor = NDArray[np.float64]
+RGBColor = NDArray[np.float64]
 PilRGBColor = tuple[int, int, int]
 
 
@@ -29,14 +29,14 @@ def convert_hex_to_rgb(hex_color: str) -> np.ndarray:
     return rgb_255 / 255.0
 
 
-def rgb_to_oklab(rgb: ColourArrayLike) -> ColourArrayLike:
+def rgb_to_oklab(rgb: RGBColor) -> OkLabColor:
     """
     Convert sRGB float (0–1) to OKLab.
     """
     return colour.convert(rgb, "RGB", "OKLAB", source_colourspace=RGB_COLOURSPACE_sRGB)
 
 
-def oklab_to_rgb(lab: ColourArrayLike) -> ColourArrayLike:
+def oklab_to_rgb(lab: OkLabColor) -> RGBColor:
     """
     Convert OKLab back to sRGB float (0–1).
     """

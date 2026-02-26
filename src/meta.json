@@ -6,7 +6,8 @@
 		"global_version": 1
 	},
 	"removable": [
-		" Tooltip"
+		" Tooltip",
+		" Hearts"
 	],
 	"shortenable": {
 		"Frame-only": "Fr...",

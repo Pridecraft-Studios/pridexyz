@@ -230,6 +230,11 @@ class HeartsBuilder(Builder):
                 # unscaled icon
                 pack_png = Image.alpha_composite(pack_png_bg, full_default_sprite)
 
+                # add 1px padding on all sides
+                pack_png_padded = Image.new("RGBA", (11, 11), (0, 0, 0, 0))
+                pack_png_padded.paste(pack_png, (1, 1))
+                pack_png = pack_png_padded
+
                 # Compose unscaled gallery
                 for i in range(0, 8):
                     pack_gallery.alpha_composite(

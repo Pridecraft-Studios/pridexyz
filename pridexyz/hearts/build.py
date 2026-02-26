@@ -281,7 +281,7 @@ class HeartsBuilder(Builder):
                 # Save outputs
                 pack_png.save(build_zip_collect_path / "pack.png")
                 pack_png.save(build_out_path / f"{pack_name}.png")
-                pack_gallery.save(build_out_path / f"gallery_{pack_name}.png")
+                pack_gallery.save(build_out_path / f"gallery_{pack_name}.webp", format="webp", optimize=True, quality=80, method=5)
 
                 # Compress
                 self.debug(f"Compressing and finalizing {pack_name}")

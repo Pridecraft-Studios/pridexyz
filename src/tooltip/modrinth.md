@@ -5,7 +5,7 @@ summary: Changes the Minecraft Tooltip to {pack_friendly_name_description} – P
 version_file: {pack_name}.zip
 version_version: {pack_version}
 icon_file: {pack_name}.png
-gallery_file: gallery_{pack_name}.png
+gallery_file: gallery_{pack_name}.webp
 gallery_title: Modified Tooltip (Banner)
 gallery_description: Banner showing the modified Tooltip. Cursor texture from the Minecraft Cursor Mod by fishstiz.
 primary_categories: gui themed tweaks

@@ -5,7 +5,7 @@ summary: Changes the Minecraft Hearts to {pack_friendly_name_description} – Pa
 version_file: {pack_name}.zip
 version_version: {pack_version}
 icon_file: {pack_name}.png
-gallery_file: gallery_{pack_name}.png
+gallery_file: gallery_{pack_name}.webp
 gallery_title: Modified Hearts (Banner)
 gallery_description: Banner showing the modified Hearts (Blinking, Half, Hardcore, etc).
 primary_categories: gui themed tweaks

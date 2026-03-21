@@ -870,7 +870,7 @@
 			"#232323"
 		]
 	},
-	"black/0": {
+	"black": {
 		"version": 1,
 		"description_name": "Black",
 		"tooltip": {
@@ -886,19 +886,6 @@
 			]
 		},
 		"colors": [
-			"#000000"
-		]
-	},
-	"black/1": {
-		"version": 1,
-		"description_name": "Black",
-		"tooltip": {
-			"styles": [
-				"split-mono-bg-frame"
-			]
-		},
-		"colors": [
-			"#000000",
 			"#000000"
 		]
 	},
@@ -1621,6 +1608,19 @@
 		]
 	},
 	"$deprecated": {
+		"black/1": {
+			"version": 1,
+			"description_name": "Black",
+			"tooltip": {
+				"styles": [
+					"split-mono-bg-frame"
+				]
+			},
+			"colors": [
+				"#000000",
+				"#000000"
+			]
+		},
 		"nonbinary-alt": {
 			"version": 1,
 			"description_name": "Alt Non-binary Pride Flag",

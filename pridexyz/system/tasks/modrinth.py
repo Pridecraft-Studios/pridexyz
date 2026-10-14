@@ -1,3 +1,4 @@
+import csv
 import os
 import re
 from enum import Enum
@@ -516,6 +517,62 @@ def submit(ctx: typer.Context):
                 )
             else:
                 logger.info(f"[{res.get('slug')}] Submitted.")
+
+@app.command()
+def fix_slug(ctx: typer.Context):
+    settings = get_config(ctx)
+
+    api = get_api(settings)
+    existing_projects, _ = fetch_org_projects(api, settings)
+
+    for slug, project in existing_projects.items():
+        if "." in project.get("slug"):
+            logger.info(f"[{slug}] Already fixed.")
+        else:
+            try:
+                logger.info(f"[{slug}] Trying to fix {project.get('slug')} to {project["slug"].replace("-plus", ".")}")
+                api.modify_project(project["id"], ProjectUpdate(slug=project["slug"].replace("-plus", ".")))
+                print({"slug": slug, "dir_name": slug, "success": True})
+            except ModrinthAPIError as e:
+                print({
+                    "slug": slug,
+                    "dir_name": slug,
+                    "success": False,
+                    "ModrinthAPIError": e,
+                })
+    return None
+
+@app.command()
+def export_csv(
+    ctx: typer.Context,
+    output: Path = typer.Option(
+        Path("projects.csv"), help="Where to write the CSV"
+    ),
+):
+    settings = get_config(ctx)
+
+    api = get_api(settings)
+    existing_projects, _ = fetch_org_projects(api, settings)
+
+    rows = sorted(
+        (
+            {
+                "id": p.get("id", ""),
+                "slug": p.get("slug", ""),
+                "name": p.get("name", ""),
+            }
+            for p in existing_projects.values()
+        ),
+        key=lambda r: r["slug"],
+    )
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["id", "slug", "name"])
+        writer.writeheader()
+        writer.writerows(rows)
+
+    logger.info(f"Wrote {len(rows)} projects to {output}.")
 
 
 @app.command()

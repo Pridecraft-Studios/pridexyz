@@ -59,7 +59,7 @@ class HeartsBuilder(Builder):
             style_name = style_name
             style_description_name = style_config["description_name"]
             style_explanation = style_config["explanation"]
-            pack_slug = f"hearts_{palette_name}+{style_name}"
+            pack_slug = f"hearts_{palette_name}.{style_name}"
             pack_version = f"v{palette['version']}+v{style_config['version']}+v{self.meta['hearts']['global_version']}"
             pack_name = f"hearts_{palette_name}.v{palette['version']}+{style_name}.v{style_config['version']}+v{self.meta['hearts']['global_version']}"
             pack_friendly_name = (

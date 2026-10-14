@@ -70,7 +70,7 @@ class TooltipBuilder(Builder):
                 style_explanation = style_config[
                     "explanation"
                 ] + auto_sub_style_config.get("explanation_suffix", "")
-                pack_slug = f"tooltip_{palette_name}+{style_name}"
+                pack_slug = f"tooltip_{palette_name}.{style_name}"
                 pack_version = f"v{palette['version']}+v{style_config['version']}+v{self.meta['tooltip']['global_version']}"
                 pack_name = f"tooltip_{palette_name}.v{palette['version']}+{style_name}.v{style_config['version']}+v{self.meta['tooltip']['global_version']}"
                 pack_friendly_name = (

@@ -13,6 +13,7 @@ additional_categories: vanilla-like utility simplistic equipment 16x
 issue_url: https://github.com/Pridecraft-Studios/pridetooltips/issues
 source_url: https://github.com/Pridecraft-Studios/pridetooltips
 discord_url: https://discord.pridecraft.gay/
+donation_url: https://ko-fi.com/rotgruengelb
 license_id: CC-BY-SA-4.0
 org_id_source: tooltip
 version_game_version_cutoff: 24w36a
@@ -61,6 +62,7 @@ A collection of resource packs that change tooltips to be colorful and/or pride 
 
 [![Watch me on Youtube](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/youtube-singular_46h.png)](https://youtube.com/rotgruengelb)
 [![See me on GitHub](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/github-singular_46h.png)](https://github.com/rotgruengelb)
+[![Support me on Ko-fi](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/donate/kofi-singular_46h.png)](https://ko-fi.com/rotgruengelb)
 
 ### Pridecraft Studios:
 

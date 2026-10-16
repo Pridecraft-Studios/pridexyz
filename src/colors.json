@@ -947,8 +947,8 @@
 			]
 		}
 	},
-	"bigender": {
-		"version": 1,
+	"bigender/0": {
+		"version": 2,
 		"description_name": "Bigender Pride Flag",
 		"tooltip": {
 			"styles": [
@@ -963,21 +963,51 @@
 				"7clr-vert"
 			]
 		},
-		"colors": [
-			"#c982a5",
-			"#edaacb",
-			"#d7c8e8",
-			"#ffffff",
-			"#d7c8e8",
-			"#9dc7e7",
-			"#6f83cd"
-		],
 		"xp_bars": {
 			"styles": [
 				"stripes",
 				"gradient"
 			]
 		}
+		"colors": [
+			"#7891d2",
+			"#a1c1e3",
+			"#fffffe",
+			"#bfa5e6",
+			"#fffffe",
+			"#e6aec4",
+			"#d67fa6"
+		]
+	},
+	"bigender/1": {
+		"version": 2,
+		"description_name": "Bigender Pride Flag",
+		"tooltip": {
+			"styles": [
+				"5clr-full",
+				"5clr-frame",
+				"5clr-frame-altbg"
+			]
+		},
+		"hearts": {
+			"styles": [
+				"5clr",
+				"5clr-vert"
+			]
+		},
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
+		"colors": [
+			"#d67ea8",
+			"#f7f36c",
+			"#fffffe",
+			"#a170b8",
+			"#829ddc"
+		]
 	},
 	"blue": {
 		"version": 1,
@@ -1349,7 +1379,12 @@
 	"lavender/0": {
 		"version": 1,
 		"description_name": "Lavender",
-		"tooltip": {
+		"tooltip": {		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 			"styles": [
 				"split-mono-bg-frame"
 			]
@@ -1420,7 +1455,12 @@
 			]
 		},
 		"hearts": {
+			"styles": [		"xp_bars": {
 			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 				"mono"
 			]
 		},

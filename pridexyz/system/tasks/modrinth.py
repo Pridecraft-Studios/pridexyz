@@ -295,6 +295,11 @@ def update(
                         update_payload.issues_url = d["issue_url"]
                         update_payload.source_url = d["source_url"]
                         update_payload.discord_url = d["discord_url"]
+                        update_payload.donation_urls = [{
+                            "id": "ko-fi",
+                            "platform": "Ko-fi",
+                            "url": d["donation_url"],
+                        }]
                         update_payload.license_id = d["license_id"]
                         if not update_payload.body:
                             update_payload.body = new_body

@@ -5,9 +5,13 @@
 	"hearts": {
 		"global_version": 1
 	},
+	"xp_bar": {
+		"global_version": 1
+	},
 	"removable": [
 		" Tooltip",
-		" Hearts"
+		" Hearts",
+		" XP Bar"
 	],
 	"shortenable": {
 		"Frame-only": "Fr...",
@@ -15,6 +19,8 @@
 		"Background/Frame": "B.../Fr...",
 		"Monochrome": "Mono...",
 		"Color": "C...",
-		"Turned": "Tu..."
+		"Turned": "Tu...",
+		"Banded": "Banded",
+		"Gradient": "G..."
 	}
 }

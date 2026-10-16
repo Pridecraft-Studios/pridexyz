@@ -968,7 +968,7 @@
 				"stripes",
 				"gradient"
 			]
-		}
+		},
 		"colors": [
 			"#7891d2",
 			"#a1c1e3",
@@ -1000,7 +1000,7 @@
 				"stripes",
 				"gradient"
 			]
-		}
+		},
 		"colors": [
 			"#d67ea8",
 			"#f7f36c",
@@ -1030,7 +1030,6 @@
 		"xp_bars": {
 			"styles": [
 				"mono"
-
 			]
 		}
 	},
@@ -1055,7 +1054,6 @@
 		"xp_bars": {
 			"styles": [
 				"mono"
-
 			]
 		}
 	},
@@ -1080,7 +1078,6 @@
 		"xp_bars": {
 			"styles": [
 				"mono"
-
 			]
 		}
 	},
@@ -1379,14 +1376,15 @@
 	"lavender/0": {
 		"version": 1,
 		"description_name": "Lavender",
-		"tooltip": {		"xp_bars": {
+		"tooltip": {
+			"styles": [
+				"split-mono-bg-frame"
+			]
+		},
+		"xp_bars": {
 			"styles": [
 				"stripes",
 				"gradient"
-			]
-		}
-			"styles": [
-				"split-mono-bg-frame"
 			]
 		},
 		"colors": [
@@ -1455,14 +1453,15 @@
 			]
 		},
 		"hearts": {
-			"styles": [		"xp_bars": {
 			"styles": [
-				"stripes",
-				"gradient"
-			]
-		}
 				"mono"
-			]
+			],
+			"xp_bars": {
+				"styles": [
+					"stripes",
+					"gradient"
+				]
+			}
 		},
 		"colors": [
 			"#f5abb9"
@@ -2062,7 +2061,7 @@
 		"xp_bars": {
 			"styles": [
 				"mono"
-						]
+			]
 		}
 	},
 	"neptuneblue": {

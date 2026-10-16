@@ -7,10 +7,12 @@ from pridexyz.color import convert_hex_to_rgb
 from pridexyz.hearts.build import HeartsBuilder
 from pridexyz.system.config import get_config, logger
 from pridexyz.tooltip.build import TooltipBuilder
+from pridexyz.xp_bar.build import XPBarBuilder
 
 AVAILABLE_BUILDERS = {
     "hearts": HeartsBuilder,
     "tooltip": TooltipBuilder,
+    "xp_bars": XPBarBuilder,
 }
 
 

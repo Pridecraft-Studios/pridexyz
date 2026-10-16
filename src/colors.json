@@ -19,7 +19,13 @@
 			"#d60270",
 			"#9b4f96",
 			"#0038a8"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"pansexual": {
 		"version": 1,
@@ -41,7 +47,13 @@
 			"#ff1b8d",
 			"#ffd800",
 			"#21b1ff"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"modrinth": {
 		"version": 1,
@@ -60,7 +72,12 @@
 		},
 		"colors": [
 			"#1bd96a"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"tvtestpattern": {
 		"version": 1,
@@ -86,7 +103,13 @@
 			"#c100c1",
 			"#c10605",
 			"0c00c1"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"polysexual": {
 		"version": 1,
@@ -108,7 +131,13 @@
 			"#F714BA",
 			"#01D66A",
 			"#1594F6"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"intersex/0": {
 		"version": 2,
@@ -119,13 +148,18 @@
 			]
 		},
 		"hearts": {
-			"styles": [
-			]
+			"styles": []
 		},
 		"colors": [
 			"#ffd80b",
 			"#7900aa"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"intersex/1": {
 		"version": 2,
@@ -163,7 +197,14 @@
 			"#ffffff",
 			"#7cafe3",
 			"#3b1379"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			],
+			"anti_override_tag": "5clr"
+		}
 	},
 	"nonbinary": {
 		"version": 2,
@@ -186,7 +227,13 @@
 			"#FFF8E7",
 			"#9B59D0",
 			"#2D2D2D"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"asexual": {
 		"version": 1,
@@ -209,7 +256,13 @@
 			"#a4a5a4",
 			"#ffffff",
 			"#810081"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"asexual-spectrum": {
 		"version": 1,
@@ -232,7 +285,13 @@
 			"#7657ae",
 			"#da92b4",
 			"#ffeced"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"aromantic": {
 		"version": 1,
@@ -257,7 +316,13 @@
 			"#ffffff",
 			"#a9a9a9",
 			"#232323"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"aromantic-spectrum": {
 		"version": 1,
@@ -282,7 +347,13 @@
 			"#f2fccf",
 			"#186264",
 			"#052127"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"aroace": {
 		"version": 1,
@@ -307,7 +378,13 @@
 			"#ffffff",
 			"#63aedc",
 			"#203856"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"fiaspec": {
 		"version": 1,
@@ -332,7 +409,13 @@
 			"#ede0df",
 			"#e3c5c9",
 			"#c771a3"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"miaspec": {
 		"version": 1,
@@ -357,7 +440,13 @@
 			"#fdfaec",
 			"#8ceaf2",
 			"#6fafe1"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"gay-mlm/1": {
 		"version": 1,
@@ -383,7 +472,14 @@
 			"#7bade2",
 			"#5049cc",
 			"#3d1a78"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			],
+			"anti_override_tag": "7clr"
+		}
 	},
 	"demigender": {
 		"version": 1,
@@ -409,7 +505,13 @@
 			"#fbff74",
 			"#c3c3c3",
 			"#7f7f7f"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"demigirl": {
 		"version": 1,
@@ -435,7 +537,13 @@
 			"#feaec9",
 			"#c3c3c3",
 			"#7f7f7f"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"demiboy": {
 		"version": 1,
@@ -461,7 +569,13 @@
 			"#9ad9ea",
 			"#c3c3c3",
 			"#7f7f7f"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"demiflux": {
 		"version": 1,
@@ -487,7 +601,13 @@
 			"#9ad9ea",
 			"#c3c3c3",
 			"#7f7f7f"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"polyamory/0": {
 		"version": 1,
@@ -512,7 +632,14 @@
 			"#ffffff",
 			"#e3355b",
 			"#5e167f"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			],
+			"anti_override_tag": "5clr"
+		}
 	},
 	"genderfluid": {
 		"version": 1,
@@ -537,7 +664,13 @@
 			"#bf24cb",
 			"#282828",
 			"#313bbe"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"genderqueer": {
 		"version": 1,
@@ -559,7 +692,13 @@
 			"#b87fd4",
 			"#ffffff",
 			"#478253"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"nonhuman": {
 		"version": 1,
@@ -581,7 +720,13 @@
 			"#167948",
 			"#ffffff",
 			"#593c8f"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"lesbian/0": {
 		"version": 1,
@@ -606,7 +751,14 @@
 			"#ffffff",
 			"#d362a4",
 			"#a30262"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			],
+			"anti_override_tag": "5clr"
+		}
 	},
 	"lesbian/1": {
 		"version": 1,
@@ -632,7 +784,14 @@
 			"#d162a4",
 			"#b55690",
 			"#a30262"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			],
+			"anti_override_tag": "7clr"
+		}
 	},
 	"sapphic/0": {
 		"version": 1,
@@ -657,7 +816,14 @@
 			"#c86bc6",
 			"#fbf2fa",
 			"#fd8caa"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			],
+			"anti_override_tag": "5clr"
+		}
 	},
 	"sapphic/1": {
 		"version": 1,
@@ -679,7 +845,14 @@
 			"#fd8caa",
 			"#fbf2fa",
 			"#c86bc6"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			],
+			"anti_override_tag": "3clr"
+		}
 	},
 	"transgender/0": {
 		"version": 1,
@@ -704,7 +877,14 @@
 			"#ffffff",
 			"#f5abb9",
 			"#5bcffa"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			],
+			"anti_override_tag": "5clr"
+		}
 	},
 	"transgender/1": {
 		"version": 1,
@@ -726,7 +906,14 @@
 			"#5bcffa",
 			"#f5abb9",
 			"#ffffff"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			],
+			"anti_override_tag": "3clr"
+		}
 	},
 	"agender": {
 		"version": 1,
@@ -752,7 +939,13 @@
 			"#ffffff",
 			"#bababa",
 			"#232323"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"bigender/0": {
 		"version": 2,
@@ -768,6 +961,12 @@
 			"styles": [
 				"7clr",
 				"7clr-vert"
+			]
+		},
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
 			]
 		},
 		"colors": [
@@ -796,6 +995,12 @@
 				"5clr-vert"
 			]
 		},
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		},
 		"colors": [
 			"#d67ea8",
 			"#f7f36c",
@@ -821,7 +1026,12 @@
 		},
 		"colors": [
 			"#0038a8"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"orange": {
 		"version": 1,
@@ -840,7 +1050,12 @@
 		},
 		"colors": [
 			"#f9ab02"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"brightgreen": {
 		"version": 1,
@@ -859,7 +1074,12 @@
 		},
 		"colors": [
 			"#9ff902"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"red": {
 		"version": 1,
@@ -878,7 +1098,12 @@
 		},
 		"colors": [
 			"#d52d00"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"teal/0": {
 		"version": 1,
@@ -897,7 +1122,12 @@
 		},
 		"colors": [
 			"#018e71"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"teal/1": {
 		"version": 1,
@@ -929,7 +1159,12 @@
 		},
 		"colors": [
 			"#00ff00"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"softblue": {
 		"version": 1,
@@ -948,7 +1183,12 @@
 		},
 		"colors": [
 			"#7bade2"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"purple/0": {
 		"version": 1,
@@ -967,7 +1207,12 @@
 		},
 		"colors": [
 			"#ac2afc"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"purple/1": {
 		"version": 1,
@@ -999,7 +1244,12 @@
 		},
 		"colors": [
 			"#ffd800"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"darkgray": {
 		"version": 1,
@@ -1018,7 +1268,12 @@
 		},
 		"colors": [
 			"#232323"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"black": {
 		"version": 1,
@@ -1037,7 +1292,12 @@
 		},
 		"colors": [
 			"#000000"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"white": {
 		"version": 1,
@@ -1056,7 +1316,12 @@
 		},
 		"colors": [
 			"#ffffff"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"pinkred-blue": {
 		"version": 1,
@@ -1101,7 +1366,12 @@
 		},
 		"colors": [
 			"#eae8ca"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"lavender/0": {
 		"version": 1,
@@ -1109,6 +1379,12 @@
 		"tooltip": {
 			"styles": [
 				"split-mono-bg-frame"
+			]
+		},
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
 			]
 		},
 		"colors": [
@@ -1133,7 +1409,12 @@
 		},
 		"colors": [
 			"#bbbbf9"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"simple": {
 		"version": 1,
@@ -1174,11 +1455,22 @@
 		"hearts": {
 			"styles": [
 				"mono"
-			]
+			],
+			"xp_bars": {
+				"styles": [
+					"stripes",
+					"gradient"
+				]
+			}
 		},
 		"colors": [
 			"#f5abb9"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"magenta": {
 		"version": 1,
@@ -1197,7 +1489,12 @@
 		},
 		"colors": [
 			"#ff00ff"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"cyan": {
 		"version": 1,
@@ -1216,7 +1513,12 @@
 		},
 		"colors": [
 			"#00ffff"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"gray": {
 		"version": 1,
@@ -1235,7 +1537,12 @@
 		},
 		"colors": [
 			"#808080"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"lightgray": {
 		"version": 1,
@@ -1254,7 +1561,12 @@
 		},
 		"colors": [
 			"#bababa"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"navy": {
 		"version": 1,
@@ -1273,7 +1585,12 @@
 		},
 		"colors": [
 			"#000080"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"lime": {
 		"version": 1,
@@ -1292,7 +1609,12 @@
 		},
 		"colors": [
 			"#9afda4"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"raspberry": {
 		"version": 1,
@@ -1311,7 +1633,12 @@
 		},
 		"colors": [
 			"#FE6A6A"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"pastelrose": {
 		"version": 1,
@@ -1330,7 +1657,12 @@
 		},
 		"colors": [
 			"#ed91b6"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"babypink": {
 		"version": 1,
@@ -1349,7 +1681,12 @@
 		},
 		"colors": [
 			"#ffd7fc"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"pink": {
 		"version": 1,
@@ -1368,7 +1705,12 @@
 		},
 		"colors": [
 			"#fd2eb1"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"lilac": {
 		"version": 1,
@@ -1387,7 +1729,12 @@
 		},
 		"colors": [
 			"#df93ff"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"duckegggray": {
 		"version": 1,
@@ -1406,7 +1753,12 @@
 		},
 		"colors": [
 			"#bee1e3"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"smokeblue": {
 		"version": 1,
@@ -1425,7 +1777,12 @@
 		},
 		"colors": [
 			"#c3c2e2"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"mintgreen": {
 		"version": 1,
@@ -1444,7 +1801,12 @@
 		},
 		"colors": [
 			"#a7fcdb"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"rainbow": {
 		"version": 1,
@@ -1470,7 +1832,13 @@
 			"#78a1ed",
 			"#a78cdc",
 			"#dc8cd8"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"pride1978": {
 		"version": 1,
@@ -1496,7 +1864,13 @@
 			"#0ac1c1",
 			"#3e0099",
 			"#8e1c8f"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"seagreen": {
 		"version": 1,
@@ -1515,7 +1889,12 @@
 		},
 		"colors": [
 			"#a6e8aa"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"peagreen": {
 		"version": 1,
@@ -1534,7 +1913,12 @@
 		},
 		"colors": [
 			"#ccfca6"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"lemonyellow": {
 		"version": 1,
@@ -1553,7 +1937,12 @@
 		},
 		"colors": [
 			"#f9ff91"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"apricotorange": {
 		"version": 1,
@@ -1572,7 +1961,12 @@
 		},
 		"colors": [
 			"#ead376"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"peachorange": {
 		"version": 1,
@@ -1591,7 +1985,12 @@
 		},
 		"colors": [
 			"#fcb96b"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"coralorange": {
 		"version": 1,
@@ -1610,7 +2009,12 @@
 		},
 		"colors": [
 			"#f1956e"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"lightredbrown": {
 		"version": 1,
@@ -1629,7 +2033,12 @@
 		},
 		"colors": [
 			"#997d65"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"brown": {
 		"version": 1,
@@ -1648,7 +2057,12 @@
 		},
 		"colors": [
 			"#b75752"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"neptuneblue": {
 		"version": 1,
@@ -1667,7 +2081,12 @@
 		},
 		"colors": [
 			"#2E5D9D"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"springteal": {
 		"version": 1,
@@ -1686,7 +2105,12 @@
 		},
 		"colors": [
 			"#0EA7A5"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"darkgreen": {
 		"version": 1,
@@ -1705,7 +2129,12 @@
 		},
 		"colors": [
 			"#006400"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"mono"
+			]
+		}
 	},
 	"pride-bright": {
 		"version": 1,
@@ -1730,7 +2159,13 @@
 			"#3bc41b",
 			"#2476ca",
 			"#ba00a1"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"pride": {
 		"version": 1,
@@ -1755,7 +2190,13 @@
 			"#00821b",
 			"#104aff",
 			"#780089"
-		]
+		],
+		"xp_bars": {
+			"styles": [
+				"stripes",
+				"gradient"
+			]
+		}
 	},
 	"$deprecated": {
 		"black/1": {

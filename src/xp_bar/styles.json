@@ -1,0 +1,24 @@
+{
+	"stripes": {
+		"description_name": "Stripes",
+		"explanation": "An XP bar that displays each palette color as a discrete band across the bar, with no interpolation between colors",
+		"version": 1,
+		"expects": -1,
+		"mode": "banded"
+	},
+	"gradient": {
+		"description_name": "Gradient",
+		"explanation": "An XP bar that smoothly interpolates between all palette colors using OKLab for a perceptually even gradient",
+		"version": 1,
+		"expects": -1,
+		"mode": "gradient"
+	},
+	"mono": {
+		"description_name": "",
+		"explanation": "An XP bar that shows on solid color",
+		"version": 1,
+		"expects": 1,
+		"mode": "banded",
+		"no_lable": true
+	}
+}

@@ -1,8 +1,10 @@
 {
 	"tooltip": "MODRINTH_TOOLTIP_ORG_ID",
 	"hearts": "MODRINTH_HEARTS_ORG_ID",
+	"xp_bars": "MODRINTH_XP_BARS_ORG_ID",
 	"cutoffs": {
 		"tooltip": "24w36a",
-		"hearts": "1.20.2"
+		"hearts": "1.20.2",
+		"xp_bars": "1.21.1"
 	}
 }

@@ -26,7 +26,6 @@ from pridexyz.system.config import logger, Config, get_config
 
 app = typer.Typer(help="Manage Modrinth projects (Create, Update, Publish, Sync)")
 
-
 class UpdateMode(str, Enum):
     ALL = "all"
     ICON = "icon"
@@ -211,6 +210,9 @@ def update(
     mode: UpdateMode = typer.Argument(
         ..., help="What to update: icon, gallery, data, body, or all"
     ),
+    skip_desc: bool = typer.Option(
+        False, help="Skip description and name"
+    )
 ):
     settings = get_config(ctx)
     api = get_api(settings)
@@ -286,8 +288,9 @@ def update(
 
                     if m in [UpdateMode.ALL, UpdateMode.DATA]:
                         logger.info(f"[{dir_name}] Updating metadata...")
-                        update_payload.title = d["name"]
-                        update_payload.description = d["summary"]
+                        if not skip_desc:
+                            update_payload.title = d["name"]
+                            update_payload.description = d["summary"]
                         update_payload.categories = d["primary_categories"].split(" ")
                         update_payload.additional_categories = d[
                             "additional_categories"
